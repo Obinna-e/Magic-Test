@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import './workoutItem.dart';
+import 'workouts.dart';
 
 class PopularWorkOuts extends StatelessWidget {
   const PopularWorkOuts({
@@ -13,7 +13,7 @@ class PopularWorkOuts extends StatelessWidget {
       child: GridView.count(
         scrollDirection: Axis.vertical,
         crossAxisCount: 2,
-        children: [
+        children: const [
           WorkOut(
             title: 'CHEST',
             img: 'chest.jpeg',
