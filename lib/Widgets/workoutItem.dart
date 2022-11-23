@@ -4,11 +4,11 @@ class WorkOut extends StatelessWidget {
   const WorkOut({
     Key? key,
     required this.title,
-    this.img,
+    required this.img,
   }) : super(key: key);
 
   final String title;
-  final String? img;
+  final String img;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -19,6 +19,8 @@ class WorkOut extends StatelessWidget {
           children: [
             Container(
               height: 150,
+              width: 150,
+              child: Image.asset('assets/images/$img'),
             ),
             Align(alignment: Alignment.bottomLeft, child: Text(title))
           ],

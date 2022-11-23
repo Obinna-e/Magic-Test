@@ -16,27 +16,35 @@ class PopularWorkOuts extends StatelessWidget {
         children: [
           WorkOut(
             title: 'CHEST',
+            img: 'chest.jpeg',
           ),
           WorkOut(
             title: 'SHOULDER',
+            img: 'shoulder.png',
           ),
           WorkOut(
             title: 'BICEP',
+            img: 'bicep.jpg',
           ),
           WorkOut(
             title: 'TRICEP',
+            img: 'tricep.jpeg',
           ),
           WorkOut(
             title: 'LEG',
+            img: 'legs.jpg',
           ),
           WorkOut(
             title: 'BACK',
+            img: 'back.jpg',
           ),
           WorkOut(
             title: 'ABS',
+            img: 'abs.jpg',
           ),
           WorkOut(
             title: 'CARDIO',
+            img: 'cardio.jpeg',
           ),
         ],
       ),
