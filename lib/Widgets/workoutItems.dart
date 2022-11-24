@@ -1,43 +1,78 @@
-// import 'package:flutter/material.dart';
-// import 'package:magic_seniordev_test/models/workoutModel.dart';
+import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/models/workOutData.dart';
+import 'package:magic_seniordev_test/models/workoutModel.dart';
+import 'package:provider/provider.dart';
 
-// Widget WorkoutItems(
-//     String img, String title, String subtitle, bool isSelected, int index) {
-//   return ListTile(
-//     leading: ConstrainedBox(
-//       constraints: BoxConstraints(
-//         minWidth: 44,
-//         minHeight: 44,
-//         maxWidth: 80,
-//         maxHeight: 80,
-//       ),
-//       child: Image.asset(
-//         'assets/images/${img}',
-//         height: 75,
-//         width: 75,
-//       ),
-//     ),
-//     title: Text(title),
-//     subtitle: Text(subtitle),
-//     trailing: isSelected
-//         ? Icon(Icons.check_circle, color: Colors.blue)
-//         : Icon(
-//             Icons.check_circle_outline,
-//             color: Colors.grey,
-//           ),
-//     onTap: () {
-//       setState(() {
-//         workoutss[index].isSelected = !isSelected;
+class WorkoutItems extends StatefulWidget {
+  const WorkoutItems(
+      {Key? key,
+      required this.img,
+      required this.title,
+      required this.subtitle,
+      required this.isSelected,
+      required this.index})
+      : super(key: key);
 
-//         if (isSelected == true) {
-//           selectedItems.add(
-//               WorkoutModel(widget.img, widget.title, widget.subtitle, true));
-//         } else if (isSelected == false) {
-//           selectedItems.removeWhere((element) => element.title == widget.title);
-//         }
+  final String img;
+  final String title;
+  final String subtitle;
+  final bool isSelected;
+  final int index;
 
-//         print(selectedItems.length);
-//       });
-//     },
-//   );
-// }
+  @override
+  State<WorkoutItems> createState() => _WorkoutItemsState();
+}
+
+class _WorkoutItemsState extends State<WorkoutItems> {
+  // bool isSelected = context.watch<WorkOutData>().;
+
+  List<WorkoutModel> selectedItems = [];
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<WorkOutData>(builder: (context, data, child) {
+      return ListTile(
+        leading: ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: 44,
+            minHeight: 44,
+            maxWidth: 80,
+            maxHeight: 80,
+          ),
+          child: Image.asset(
+            'assets/images/${widget.img}',
+            height: 75,
+            width: 75,
+          ),
+        ),
+        title: Text(widget.title),
+        subtitle: Text(widget.subtitle),
+        trailing: context.watch<WorkOutData>().workouts[widget.index].isSelected
+            ? Icon(Icons.check_circle, color: Colors.blue)
+            : Icon(
+                Icons.check_circle_outline,
+                color: Colors.grey,
+              ),
+        onTap: () {
+          // if (data.selectedWorkouts.isEmpty) {
+          //   data.addWorkout(WorkoutModel(
+          //       img: widget.img,
+          //       title: widget.title,
+          //       subtitle: widget.subtitle,
+          //       isSelected: true));
+          // }
+          data.workouts[widget.index].toggle();
+          if (data.workouts[widget.index].isSelected == true) {
+            data.addWorkout(data.workouts[widget.index]);
+          } else if (data.workouts[widget.index].isSelected == false) {
+            data.removeWorkout(data.workouts[widget.index]);
+          }
+
+          print(data.workouts[widget.index].isSelected);
+          // else if (data.selectedWorkouts.isNotEmpty) {
+          //   if (data.selectedWorkouts[widget.index].isSelected)
+          // }
+        },
+      );
+    });
+  }
+}

@@ -4,10 +4,14 @@ class WorkoutModel {
   String subtitle;
   bool isSelected;
 
-  WorkoutModel(
-    this.img,
-    this.title,
-    this.subtitle,
-    this.isSelected,
-  );
+  WorkoutModel({
+    required this.img,
+    required this.title,
+    required this.subtitle,
+    required this.isSelected,
+  });
+
+  void toggle() {
+    isSelected = !isSelected;
+  }
 }
