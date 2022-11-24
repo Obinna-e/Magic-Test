@@ -1,51 +1,117 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:magic_seniordev_test/Widgets/customModal.dart';
+import 'package:magic_seniordev_test/constants/styles.dart';
+import 'package:magic_seniordev_test/models/recordedWorkOut.dart';
+import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
 import 'package:magic_seniordev_test/models/workOutData.dart';
 import 'package:provider/provider.dart';
 
+typedef void StringCallBack(String val);
+
 class WorkoutList extends StatelessWidget {
-  const WorkoutList({Key? key}) : super(key: key);
+  final StringCallBack callBack;
+  const WorkoutList({Key? key, required this.callBack}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WorkOutData>(builder: (context, data, child) {
+    String weight = '';
+    String reps = '';
+    return Consumer2<WorkOutData, RecordedWorkOutData>(
+        builder: (context, workoutProvider, recordedDataProvider, child) {
       return ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: data.selectedWorkouts.length,
+        itemCount: workoutProvider.selectedWorkouts.length,
         itemBuilder: (context, index) {
-          final workout = data.selectedWorkouts[index];
+          final workout = workoutProvider.selectedWorkouts[index];
 
           // gesture detection
           return GestureDetector(
-            onLongPress: () => data.removeWorkout(workout),
-            child: Container(
-              margin: EdgeInsets.only(bottom: 10),
-              padding: EdgeInsets.fromLTRB(12, 5, 8, 5),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Colors.black12,
-                  borderRadius: BorderRadius.circular(8)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  // text field
-                  Text(
+            onLongPress: () => workoutProvider.removeWorkout(workout),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: defaultPadding,
+                  child: Text(
                     workout.title,
-                    style: TextStyle(
-                        decoration: workout.isSelected
-                            ? TextDecoration.lineThrough
-                            : null,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
-
-                  // switch case
-                  Switch(
-                    value: workout.isSelected,
-                    onChanged: (c) => data.toggleWorkout(workout),
-                  ),
-                ],
-              ),
+                ),
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        Padding(
+                          padding: defaultPadding,
+                          child: Text('Set'),
+                        ),
+                        Text('${index + 1}'),
+                      ],
+                    ),
+                    Spacer(),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: defaultPadding,
+                          child: Text('kg'),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 100,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            inputFormatters: <TextInputFormatter>[
+                              FilteringTextInputFormatter.digitsOnly
+                            ],
+                            onChanged: (value) {
+                              ModalBottomSheet.of(context)?.weight = value;
+                            },
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 10),
+                              hintText: 'Enter Weight',
+                              border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const Spacer(),
+                    Column(
+                      children: [
+                        Padding(
+                          padding: defaultPadding,
+                          child: Text('Reps'),
+                        ),
+                        Container(
+                          height: 30,
+                          width: 100,
+                          child: TextField(
+                            onChanged: (value) {
+                              reps = value;
+                              ModalBottomSheet.of(context)?.rep = value;
+                            },
+                            decoration: InputDecoration(
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 10),
+                              hintText: 'Enter Reps',
+                              border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(8.0)),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                )
+              ],
             ),
           );
         },

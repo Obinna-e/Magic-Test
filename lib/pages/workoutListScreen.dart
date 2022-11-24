@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/Widgets/recordedWorkoutList.dart';
 
 import '../Widgets/workoutList.dart';
 
@@ -14,7 +15,7 @@ class ListOfWorkouts extends StatelessWidget {
           'History',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
-        WorkoutList(),
+        RecordedWorkoutList(),
       ],
     );
   }

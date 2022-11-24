@@ -24,8 +24,6 @@ class WorkoutItems extends StatefulWidget {
 }
 
 class _WorkoutItemsState extends State<WorkoutItems> {
-  // bool isSelected = context.watch<WorkOutData>().;
-
   List<WorkoutModel> selectedItems = [];
   @override
   Widget build(BuildContext context) {
@@ -53,24 +51,12 @@ class _WorkoutItemsState extends State<WorkoutItems> {
                 color: Colors.grey,
               ),
         onTap: () {
-          // if (data.selectedWorkouts.isEmpty) {
-          //   data.addWorkout(WorkoutModel(
-          //       img: widget.img,
-          //       title: widget.title,
-          //       subtitle: widget.subtitle,
-          //       isSelected: true));
-          // }
           data.workouts[widget.index].toggle();
           if (data.workouts[widget.index].isSelected == true) {
             data.addWorkout(data.workouts[widget.index]);
           } else if (data.workouts[widget.index].isSelected == false) {
             data.removeWorkout(data.workouts[widget.index]);
           }
-
-          print(data.workouts[widget.index].isSelected);
-          // else if (data.selectedWorkouts.isNotEmpty) {
-          //   if (data.selectedWorkouts[widget.index].isSelected)
-          // }
         },
       );
     });

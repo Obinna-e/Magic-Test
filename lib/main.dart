@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/models/recordedWorkOut.dart';
 import 'package:magic_seniordev_test/models/workOutData.dart';
 import 'package:provider/provider.dart';
 import './pages/homePage.dart';
@@ -12,8 +13,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => WorkOutData(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<WorkOutData>(create: (context) => WorkOutData()),
+        ChangeNotifierProvider<RecordedWorkOutData>(
+            create: (context) => RecordedWorkOutData()),
+      ],
       child: MaterialApp(
         title: 'Magic',
         theme: ThemeData(

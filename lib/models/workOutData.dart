@@ -60,4 +60,8 @@ class WorkOutData with ChangeNotifier {
     _selectedWorkouts.remove(workout);
     notifyListeners();
   }
+
+  void clearWorkout() {
+    _selectedWorkouts.clear();
+  }
 }
