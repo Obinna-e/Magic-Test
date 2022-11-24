@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Widgets/workoutList.dart';
+
 class ListOfWorkouts extends StatelessWidget {
   const ListOfWorkouts({Key? key}) : super(key: key);
 
@@ -12,6 +14,7 @@ class ListOfWorkouts extends StatelessWidget {
           'History',
           style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
         ),
+        WorkoutList(),
       ],
     );
   }

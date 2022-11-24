@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/models/workOutData.dart';
+import 'package:provider/provider.dart';
 import './pages/homePage.dart';
 
 void main() {
@@ -10,12 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Magic',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider(
+      create: (context) => WorkOutData(),
+      child: MaterialApp(
+        title: 'Magic',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: const MyHomePage(),
       ),
-      home: const MyHomePage(),
     );
   }
 }
