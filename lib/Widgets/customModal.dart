@@ -34,7 +34,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Consumer<WorkOutData>(builder: (context, data, child) {
+    return Consumer2<WorkOutData, RecordedWorkOutData>(
+        builder: (context, data, data2, child) {
       return SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -45,18 +46,17 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                 child: ElevatedButton(
                     onPressed: () {
                       for (var i = 0; i < data.selectedWorkouts.length; i++) {
-                        Provider.of<RecordedWorkOutData>(context, listen: false)
-                            .addWorkout(RecordedWorkOutModel(
-                                workout: data.selectedWorkouts[i],
-                                repetition: _reps,
-                                weigth: _weight,
-                                set: _set));
+                        data2.addWorkout(RecordedWorkOutModel(
+                            workout: data.selectedWorkouts[i],
+                            repetition: _reps,
+                            weigth: _weight,
+                            set: _set));
                       }
 
                       Navigator.pop(context);
                       data.clearWorkout();
                     },
-                    child: Text('Finish')),
+                    child: const Text('Finish')),
               ),
               const Align(
                 alignment: Alignment.topLeft,

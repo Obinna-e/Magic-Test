@@ -19,4 +19,8 @@ class RecordedWorkOutData with ChangeNotifier {
     _recordedworkouts.remove(workout);
     notifyListeners();
   }
+
+  void clearWorkout() {
+    _recordedworkouts.clear();
+  }
 }

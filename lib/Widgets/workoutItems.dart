@@ -44,7 +44,7 @@ class _WorkoutItemsState extends State<WorkoutItems> {
         ),
         title: Text(widget.title),
         subtitle: Text(widget.subtitle),
-        trailing: context.watch<WorkOutData>().workouts[widget.index].isSelected
+        trailing: data.workouts[widget.index].isSelected
             ? Icon(Icons.check_circle, color: Colors.blue)
             : Icon(
                 Icons.check_circle_outline,

@@ -63,5 +63,8 @@ class WorkOutData with ChangeNotifier {
 
   void clearWorkout() {
     _selectedWorkouts.clear();
+    for (WorkoutModel workout in workouts) {
+      workout.isSelected = false;
+    }
   }
 }
