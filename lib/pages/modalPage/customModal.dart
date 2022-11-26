@@ -100,6 +100,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     buttonColor: Colors.deepOrange[100],
                     onTap: () {
                       data2.userEditingWorkout.clear();
+                      data.toggleDeselect();
                       Navigator.pop(context);
                     },
                   ),
