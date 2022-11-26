@@ -22,9 +22,10 @@ class RecordedWorkoutScreen extends StatelessWidget {
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: data.recordedworkouts.length,
+              itemCount: data.recordedWorkouts.length,
               itemBuilder: (BuildContext context, index) {
                 return WorkoutPageLayout(
+                  containerIndex: index,
                   onTap: () {
                     data.removeWorkout(index);
                   },
@@ -40,9 +41,11 @@ class RecordedWorkoutScreen extends StatelessWidget {
 
 class WorkoutPageLayout extends StatelessWidget {
   final VoidCallback onTap;
+  final int containerIndex;
   const WorkoutPageLayout({
     Key? key,
     required this.onTap,
+    required this.containerIndex,
   }) : super(key: key);
 
   @override
@@ -72,10 +75,6 @@ class WorkoutPageLayout extends StatelessWidget {
                       ),
                     ),
                     Spacer(),
-                    // IconButton(
-                    //   onPressed: () {},
-                    //   icon: Icon(Icons.more_horiz),
-                    // ),
                     PopupMenuButton<Widget>(
                       itemBuilder: (BuildContext context) => [
                         PopupMenuItem(
@@ -103,7 +102,7 @@ class WorkoutPageLayout extends StatelessWidget {
                               Icon(Icons.edit),
                             ],
                           ),
-                          onTap: () {},
+                          onTap: onTap,
                         ),
                       ],
                     ),
@@ -123,40 +122,57 @@ class WorkoutPageLayout extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 2, bottom: 2),
-                    child: Text('Set 1: Bench Press'),
-                  ),
-                  SizedBox(
-                    width: 100,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 2, bottom: 2),
-                    child: Text('10 kg x 3'),
-                  ),
-                ],
-              ),
-              //TODO: Make this a listView
-              Row(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(top: 2, bottom: 2),
-                    child: Text('Set 2: Bench Press'),
-                  ),
-                  SizedBox(
-                    width: 100,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 2, bottom: 2),
-                    child: Text('40 kg x 5'),
-                  ),
-                ],
-              ),
+              ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: data.recordedWorkouts[containerIndex].length,
+                  itemBuilder: (BuildContext context, index) {
+                    return ExerciseInfo(
+                      workoutName:
+                          data.recordedWorkouts[containerIndex][index].title,
+                      weight: data
+                          .recordedWorkouts[containerIndex][index].weight
+                          .toString(),
+                      reps: data.recordedWorkouts[containerIndex][index].reps
+                          .toString(),
+                    );
+                  }),
             ],
           ),
         ),
+      );
+    });
+  }
+}
+
+class ExerciseInfo extends StatelessWidget {
+  final String workoutName;
+  final String weight;
+  final String reps;
+
+  const ExerciseInfo({
+    Key? key,
+    required this.workoutName,
+    required this.weight,
+    required this.reps,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<RecordedWorkOutProvider>(builder: (context, data, child) {
+      return Row(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 2, bottom: 2),
+            child: Text('Set 2: $workoutName'),
+          ),
+          SizedBox(
+            width: 100,
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 2, bottom: 2),
+            child: Text('$weight kg x $reps'),
+          ),
+        ],
       );
     });
   }

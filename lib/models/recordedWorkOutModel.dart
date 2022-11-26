@@ -1,7 +1,7 @@
 import './workoutModel.dart';
 
 class RecordedWorkOutModel {
-  WorkoutModel workout;
+  List<WorkoutModel> workout;
 
   RecordedWorkOutModel({
     required this.workout,

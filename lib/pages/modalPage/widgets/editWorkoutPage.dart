@@ -16,16 +16,14 @@ class EditWorkout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String weight = '';
-    String reps = '';
     return Consumer2<WorkOutDataProvider, RecordedWorkOutProvider>(
         builder: (context, workoutProvider, recordedDataProvider, child) {
       return ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
-        itemCount: workoutProvider.selectedWorkouts.length,
+        itemCount: workoutProvider.userWorkouts.length,
         itemBuilder: (context, index) {
-          final workout = workoutProvider.selectedWorkouts[index];
+          final workout = workoutProvider.userWorkouts[index];
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -64,7 +62,7 @@ class EditWorkout extends StatelessWidget {
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           onChanged: (value) {
-                            workout.weight = int.parse(value);
+                            workout.weight = int.tryParse(value);
                           },
                           decoration: const InputDecoration(
                             contentPadding:
@@ -90,8 +88,12 @@ class EditWorkout extends StatelessWidget {
                         height: 30,
                         width: 100,
                         child: TextField(
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
                           onChanged: (value) {
-                            workout.reps = int.parse(value);
+                            workout.reps = int.tryParse(value);
                           },
                           decoration: const InputDecoration(
                             contentPadding:

@@ -38,18 +38,18 @@ class WorkoutItems extends StatelessWidget {
         ),
         title: Text(title),
         subtitle: Text(subtitle),
-        trailing: data.workouts[index].isSelected
+        trailing: data.selectedWorkouts[index].isSelected
             ? const Icon(Icons.check_circle, color: Colors.blue)
             : const Icon(
                 Icons.check_circle_outline,
                 color: Colors.grey,
               ),
         onTap: () {
-          data.workouts[index].toggle();
-          if (data.workouts[index].isSelected == true) {
-            data.addWorkout(data.workouts[index]);
-          } else if (data.workouts[index].isSelected == false) {
-            data.removeWorkout(data.workouts[index]);
+          data.selectedWorkouts[index].toggle();
+          if (data.selectedWorkouts[index].isSelected == true) {
+            data.addWorkout(data.selectedWorkouts[index]);
+          } else if (data.selectedWorkouts[index].isSelected == false) {
+            data.removeWorkout(data.selectedWorkouts[index]);
           }
         },
       );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
 import 'package:magic_seniordev_test/models/workoutModel.dart';
 
-import 'package:magic_seniordev_test/pages/modalPage/widgets/workoutList.dart';
+import 'package:magic_seniordev_test/pages/modalPage/widgets/editWorkoutPage.dart';
 import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
 import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
 import 'package:magic_seniordev_test/providers/workOutData.dart';
@@ -24,13 +24,6 @@ class ModalBottomSheet extends StatefulWidget {
 }
 
 class _ModalBottomSheetState extends State<ModalBottomSheet> {
-  // String _weight = '';
-  // String _reps = '';
-  // String _set = '';
-
-  // set weight(String value) => setState(() => _weight = value);
-  // set rep(String value) => setState(() => _reps = value);
-
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -55,12 +48,12 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       title: 'Finish',
                       width: width * 0.2,
                       onTap: () {
-                        data2.addWorkout(
-                          [data.selectedWorkouts],
-                        );
+                        // data.addWorkout();
+
+                        data2.addWorkout(data.userWorkouts);
+                        data.clearWorkout();
 
                         Navigator.pop(context);
-                        data.clearWorkout();
                       },
                     )),
                 const Align(
@@ -70,7 +63,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
-                EditWorkout(),
+                const EditWorkout(),
                 const SizedBox(
                   height: 20,
                 ),

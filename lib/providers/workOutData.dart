@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 
 import '../models/workoutModel.dart';
 
-class WorkOutDataProvider with ChangeNotifier {
-  List<WorkoutModel> _workouts = [
+class WorkOutDataProvider extends ChangeNotifier {
+  List<WorkoutModel> workouts = [
     WorkoutModel(
       img: 'barbell_row.png',
       subtitle: 'Back',
@@ -54,15 +54,28 @@ class WorkOutDataProvider with ChangeNotifier {
     ),
   ];
 
-  List<WorkoutModel> _selectedWorkouts = [];
-  UnmodifiableListView<WorkoutModel> get selectedWorkouts =>
-      UnmodifiableListView(_selectedWorkouts);
+  late List<WorkoutModel> selectedWorkouts = List.from(workouts);
+  List<WorkoutModel> userWorkouts = [];
 
-  UnmodifiableListView<WorkoutModel> get workouts =>
-      UnmodifiableListView(_workouts);
+  // List<List<WorkoutModel>> userWorkouts = [];
+  // UnmodifiableListView<WorkoutModel> get selectedWorkouts =>
+  //     UnmodifiableListView(_selectedWorkouts);
+
+  // UnmodifiableListView<WorkoutModel> get workouts =>
+  //     UnmodifiableListView(_workouts);
+
+  // void addWorkout(WorkoutModel workout) {
+  //   selectedWorkouts.add(workout);
+
+  //   notifyListeners();
+  // }
+
+  // void selectWorkout(WorkoutModel workout) {
+  //   selectedWorkouts = notifyListeners();
+  // }
 
   void addWorkout(WorkoutModel workout) {
-    _selectedWorkouts.add(workout);
+    userWorkouts.add(workout);
     notifyListeners();
   }
 
@@ -72,17 +85,11 @@ class WorkOutDataProvider with ChangeNotifier {
   }
 
   void removeWorkout(WorkoutModel workout) {
-    _selectedWorkouts.remove(workout);
+    userWorkouts.remove(workout);
     notifyListeners();
   }
 
   void clearWorkout() {
-    _selectedWorkouts.clear();
-    for (WorkoutModel workout in workouts) {
-      workout.isSelected = false;
-      // workout.reps = 0;
-      // workout.set = 0;
-      // workout.weight = 0;
-    }
+    userWorkouts.clear();
   }
 }

@@ -5,25 +5,58 @@ import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
 import 'package:magic_seniordev_test/models/workoutModel.dart';
 import 'package:magic_seniordev_test/pages/homePage/widgets/workouts.dart';
 
-class RecordedWorkOutProvider with ChangeNotifier {
-  List<List<UnmodifiableListView>> recordedworkouts = [];
+class RecordedWorkOutProvider extends ChangeNotifier {
+  List<List<WorkoutModel>> recordedWorkouts = [];
 
-  void addWorkout(List<UnmodifiableListView<WorkoutModel>> workout) {
-    recordedworkouts.add(workout);
-    notifyListeners();
-  }
+  // List<WorkoutModel> _userWorkout = [];
 
-  // void removeWorkout(List<UnmodifiableListView> workout, int index) {
-  //   recordedworkouts[index].remove(workout);
+  // UnmodifiableListView<WorkoutModel> get usersWorkout =>
+  //     UnmodifiableListView(_userWorkout);
+
+  // void set userWorkout(UnmodifiableListView workout) {
+  //   _recordedworkouts.add(workout);
   //   notifyListeners();
   // }
 
-  void removeWorkout(int index) {
-    recordedworkouts.removeAt(index);
+  // UnmodifiableListView<dynamic> get recordedWorkouts =>
+  //     UnmodifiableListView(_recordedworkouts);
+
+  // void addUserWorkout(WorkoutModel workout) {
+  //   _userWorkout.add(workout);
+  // }
+
+  void addWorkout(List<WorkoutModel> workout) {
+    recordedWorkouts.add(List.from(workout));
     notifyListeners();
   }
 
-  void clearWorkout(int index) {
-    recordedworkouts[index].clear();
+  void removeWorkout(int index) {
+    recordedWorkouts.removeAt(index);
+    notifyListeners();
   }
+
+  // void clearWorkout(WorkoutModel workout) {
+  //   _userWorkout.clear();
+  // }
 }
+
+
+
+
+
+//   void addWorkout(UnmodifiableListView<WorkoutModel> workout) {
+//     recordedworkouts.add(workout);
+//     notifyListeners();
+//   }
+
+  
+
+//   void removeWorkout(int index) {
+//     recordedworkouts.removeAt(index);
+//     notifyListeners();
+//   }
+
+//   void clearWorkout(int index) {
+//     recordedworkouts[index].clear();
+//   }
+// }
