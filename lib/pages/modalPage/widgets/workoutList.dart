@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:magic_seniordev_test/Widgets/customModal.dart';
+
 import 'package:magic_seniordev_test/constants/styles.dart';
-import 'package:magic_seniordev_test/models/recordedWorkOut.dart';
-import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
-import 'package:magic_seniordev_test/models/workOutData.dart';
+import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
+import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
+import '../customModal.dart';
 
 typedef void StringCallBack(String val);
 
-class WorkoutList extends StatelessWidget {
+class EditWorkout extends StatelessWidget {
   final StringCallBack callBack;
-  const WorkoutList({Key? key, required this.callBack}) : super(key: key);
+  const EditWorkout({Key? key, required this.callBack}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     String weight = '';
     String reps = '';
-    return Consumer2<WorkOutData, RecordedWorkOutData>(
+    return Consumer2<WorkOutDataProvider, RecordedWorkOutProvider>(
         builder: (context, workoutProvider, recordedDataProvider, child) {
       return ListView.builder(
         scrollDirection: Axis.vertical,
@@ -36,28 +36,29 @@ class WorkoutList extends StatelessWidget {
                   padding: defaultPadding,
                   child: Text(
                     workout.title,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
                 Row(
                   children: [
                     Column(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: defaultPadding,
                           child: Text('Set'),
                         ),
                         Text('${index + 1}'),
                       ],
                     ),
-                    Spacer(),
+                    const Spacer(),
                     Column(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: defaultPadding,
                           child: Text('kg'),
                         ),
-                        Container(
+                        SizedBox(
                           height: 30,
                           width: 100,
                           child: TextField(
@@ -68,11 +69,11 @@ class WorkoutList extends StatelessWidget {
                             onChanged: (value) {
                               ModalBottomSheet.of(context)?.weight = value;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 10),
                               hintText: 'Enter Weight',
-                              border: const OutlineInputBorder(
+                              border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8.0)),
                               ),
@@ -84,11 +85,11 @@ class WorkoutList extends StatelessWidget {
                     const Spacer(),
                     Column(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: defaultPadding,
                           child: Text('Reps'),
                         ),
-                        Container(
+                        SizedBox(
                           height: 30,
                           width: 100,
                           child: TextField(
@@ -96,11 +97,11 @@ class WorkoutList extends StatelessWidget {
                               reps = value;
                               ModalBottomSheet.of(context)?.rep = value;
                             },
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               contentPadding:
                                   EdgeInsets.symmetric(horizontal: 10),
                               hintText: 'Enter Reps',
-                              border: const OutlineInputBorder(
+                              border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(8.0)),
                               ),

@@ -1,10 +1,9 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/constants/styles.dart';
 
-import '../Widgets/customModal.dart';
-import '../Widgets/popularWorkOuts.dart';
+import 'package:magic_seniordev_test/constants/styles.dart';
+import '../../modalPage/customModal.dart';
+import 'popularWorkOuts.dart';
 
 class WorkOutScreen extends StatelessWidget {
   const WorkOutScreen({Key? key}) : super(key: key);

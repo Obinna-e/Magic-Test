@@ -3,9 +3,9 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 
-import './workoutModel.dart';
+import '../models/workoutModel.dart';
 
-class WorkOutData with ChangeNotifier {
+class WorkOutDataProvider with ChangeNotifier {
   List<WorkoutModel> _workouts = [
     WorkoutModel(
       img: 'barbell_row.png',

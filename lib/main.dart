@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/models/recordedWorkOut.dart';
-import 'package:magic_seniordev_test/models/workOutData.dart';
+import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
+import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
-import './pages/homePage.dart';
+import 'pages/homePage/homePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,9 +15,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<WorkOutData>(create: (context) => WorkOutData()),
-        ChangeNotifierProvider<RecordedWorkOutData>(
-            create: (context) => RecordedWorkOutData()),
+        ChangeNotifierProvider<WorkOutDataProvider>(
+            create: (context) => WorkOutDataProvider()),
+        ChangeNotifierProvider<RecordedWorkOutProvider>(
+            create: (context) => RecordedWorkOutProvider()),
       ],
       child: MaterialApp(
         title: 'Magic',

@@ -1,10 +1,9 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/Widgets/workouts.dart';
+
 import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
 
-class RecordedWorkOutData with ChangeNotifier {
+class RecordedWorkOutProvider with ChangeNotifier {
   List<RecordedWorkOutModel> _recordedworkouts = [];
 
   UnmodifiableListView<RecordedWorkOutModel> get recordedworkouts =>

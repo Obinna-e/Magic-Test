@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/Widgets/workoutItems.dart';
-import 'package:magic_seniordev_test/Widgets/workoutList.dart';
-import 'package:magic_seniordev_test/models/recordedWorkOut.dart';
+
+import 'package:magic_seniordev_test/pages/modalPage/widgets/workoutList.dart';
+import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
 import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
-import 'package:magic_seniordev_test/models/workOutData.dart';
+import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/styles.dart';
-import '../models/workoutModel.dart';
+import '../../../constants/styles.dart';
+import 'widgets/selectableWorkout.dart';
 
 class ModalBottomSheet extends StatefulWidget {
   const ModalBottomSheet({
@@ -34,7 +34,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Consumer2<WorkOutData, RecordedWorkOutData>(
+    return Consumer2<WorkOutDataProvider, RecordedWorkOutProvider>(
         builder: (context, data, data2, child) {
       return SingleChildScrollView(
         child: Padding(
@@ -65,7 +65,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
-              WorkoutList(
+              EditWorkout(
                 callBack: (val) {
                   setState(() {
                     _weight = val;
@@ -87,51 +87,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return Consumer<WorkOutData>(
-                                builder: (context, data, child) {
-                              return Dialog(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20.0)),
-                                child: Container(
-                                  height: height * 0.5,
-                                  width: width * 0.98,
-                                  child: Padding(
-                                      padding: const EdgeInsets.all(12.0),
-                                      child: Column(
-                                        children: [
-                                          Expanded(
-                                            child: ListView.builder(
-                                              itemCount: data.workouts.length,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                      int index) {
-                                                return WorkoutItems(
-                                                    img: data
-                                                        .workouts[index].img,
-                                                    title: data
-                                                        .workouts[index].title,
-                                                    subtitle: data
-                                                        .workouts[index]
-                                                        .subtitle,
-                                                    isSelected: data
-                                                        .workouts[index]
-                                                        .isSelected,
-                                                    index: index);
-                                              },
-                                            ),
-                                          ),
-                                          ElevatedButton(
-                                            onPressed: () {
-                                              Navigator.pop(context);
-                                            },
-                                            child: Text(
-                                                'Add ${data.selectedWorkouts.isEmpty ? "" : "(${data.selectedWorkouts.length})"}'),
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                              );
-                            });
+                            return SelectableWorkout(
+                                height: height, width: width);
                           });
                     },
                     child: const Text(

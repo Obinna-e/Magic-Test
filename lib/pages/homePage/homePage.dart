@@ -1,7 +1,9 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/Widgets/customModal.dart';
-import './workoutListScreen.dart';
-import './workoutScreen.dart';
+
+import '../modalPage/customModal.dart';
+import '../workoutHistoryPage/workoutListScreen.dart';
+import 'widgets/workoutScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -52,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           showModalBottomSheet(
               context: context,
               builder: (context) {
-                return ModalBottomSheet();
+                return const ModalBottomSheet();
               });
         },
         child: const Icon(Icons.add),

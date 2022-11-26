@@ -17,7 +17,7 @@ class WorkOut extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 150,
               width: 150,
               child: Image.asset('assets/images/$img'),

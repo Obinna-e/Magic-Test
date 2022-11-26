@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/models/recordedWorkOut.dart';
-import 'package:magic_seniordev_test/models/workOutData.dart';
+import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
+import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
 class RecordedWorkoutList extends StatelessWidget {
@@ -8,7 +8,7 @@ class RecordedWorkoutList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecordedWorkOutData>(builder: (context, data, child) {
+    return Consumer<RecordedWorkOutProvider>(builder: (context, data, child) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
