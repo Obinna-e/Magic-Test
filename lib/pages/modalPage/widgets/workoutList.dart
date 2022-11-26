@@ -10,8 +10,9 @@ import '../customModal.dart';
 typedef void StringCallBack(String val);
 
 class EditWorkout extends StatelessWidget {
-  final StringCallBack callBack;
-  const EditWorkout({Key? key, required this.callBack}) : super(key: key);
+  const EditWorkout({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class EditWorkout extends StatelessWidget {
                             FilteringTextInputFormatter.digitsOnly
                           ],
                           onChanged: (value) {
-                            ModalBottomSheet.of(context)?.weight = value;
+                            workout.weight = int.parse(value);
                           },
                           decoration: const InputDecoration(
                             contentPadding:
@@ -90,8 +91,7 @@ class EditWorkout extends StatelessWidget {
                         width: 100,
                         child: TextField(
                           onChanged: (value) {
-                            reps = value;
-                            ModalBottomSheet.of(context)?.rep = value;
+                            workout.reps = int.parse(value);
                           },
                           decoration: const InputDecoration(
                             contentPadding:

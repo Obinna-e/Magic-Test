@@ -2,19 +2,21 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
+import 'package:magic_seniordev_test/models/workoutModel.dart';
+import 'package:magic_seniordev_test/pages/homePage/widgets/workouts.dart';
 
 class RecordedWorkOutProvider with ChangeNotifier {
-  List<RecordedWorkOutModel> _recordedworkouts = [];
+  List<WorkoutModel> _recordedworkouts = [];
 
-  UnmodifiableListView<RecordedWorkOutModel> get recordedworkouts =>
+  UnmodifiableListView<WorkoutModel> get recordedworkouts =>
       UnmodifiableListView(_recordedworkouts);
 
-  void addWorkout(RecordedWorkOutModel workout) {
+  void addWorkout(WorkoutModel workout) {
     _recordedworkouts.add(workout);
     notifyListeners();
   }
 
-  void removeWorkout(RecordedWorkOutModel workout) {
+  void removeWorkout(WorkoutModel workout) {
     _recordedworkouts.remove(workout);
     notifyListeners();
   }

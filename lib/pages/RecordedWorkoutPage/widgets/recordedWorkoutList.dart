@@ -28,7 +28,9 @@ class RecordedWorkoutList extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                        'Set 1: ${workout.workout.title} - ${workout.weigth}, ${workout.repetition} repetitions'),
+                        // 'Set 1: ${workout.workout.title} - ${workout.wor}, ${workout.repetition} repetitions'
+
+                        'i'),
 
                     // switch case
                   ],

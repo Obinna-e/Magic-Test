@@ -12,30 +12,45 @@ class WorkOutDataProvider with ChangeNotifier {
       subtitle: 'Back',
       title: 'Barbell Row',
       isSelected: false,
+      set: 0,
+      weight: 0,
+      reps: 0,
     ),
     WorkoutModel(
       img: 'bench_press.jpeg',
       subtitle: 'Chest',
       title: 'Bench Press',
       isSelected: false,
+      set: 0,
+      weight: 0,
+      reps: 0,
     ),
     WorkoutModel(
       img: 'shoulder_press.jpeg',
       subtitle: 'Shoulders',
       title: 'Shoulder Press',
       isSelected: false,
+      set: 0,
+      weight: 0,
+      reps: 0,
     ),
     WorkoutModel(
       img: 'deadlift.jpg',
       subtitle: 'Legs',
       title: 'Deadlift',
       isSelected: false,
+      set: 0,
+      weight: 0,
+      reps: 0,
     ),
     WorkoutModel(
       img: 'squat.png',
       subtitle: 'Legs',
       title: 'Squat',
       isSelected: false,
+      set: 0,
+      weight: 0,
+      reps: 0,
     ),
   ];
 
@@ -65,6 +80,9 @@ class WorkOutDataProvider with ChangeNotifier {
     _selectedWorkouts.clear();
     for (WorkoutModel workout in workouts) {
       workout.isSelected = false;
+      // workout.reps = 0;
+      // workout.set = 0;
+      // workout.weight = 0;
     }
   }
 }

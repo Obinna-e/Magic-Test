@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
+import 'package:magic_seniordev_test/models/workoutModel.dart';
 
 import 'package:magic_seniordev_test/pages/modalPage/widgets/workoutList.dart';
 import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
@@ -23,12 +24,12 @@ class ModalBottomSheet extends StatefulWidget {
 }
 
 class _ModalBottomSheetState extends State<ModalBottomSheet> {
-  String _weight = '';
-  String _reps = '';
-  String _set = '';
+  // String _weight = '';
+  // String _reps = '';
+  // String _set = '';
 
-  set weight(String value) => setState(() => _weight = value);
-  set rep(String value) => setState(() => _reps = value);
+  // set weight(String value) => setState(() => _weight = value);
+  // set rep(String value) => setState(() => _reps = value);
 
   @override
   Widget build(BuildContext context) {
@@ -55,11 +56,9 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       width: width * 0.2,
                       onTap: () {
                         for (var i = 0; i < data.selectedWorkouts.length; i++) {
-                          data2.addWorkout(RecordedWorkOutModel(
-                              workout: data.selectedWorkouts[i],
-                              repetition: _reps,
-                              weigth: _weight,
-                              set: _set));
+                          data2.addWorkout(
+                            data.selectedWorkouts[i],
+                          );
                         }
                         Navigator.pop(context);
                         data.clearWorkout();
@@ -72,14 +71,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
-                EditWorkout(
-                  callBack: (val) {
-                    setState(() {
-                      _weight = val;
-                      _reps = val;
-                    });
-                  },
-                ),
+                EditWorkout(),
                 const SizedBox(
                   height: 20,
                 ),
