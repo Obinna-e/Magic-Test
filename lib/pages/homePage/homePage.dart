@@ -1,9 +1,9 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 
+import '../RecordedWorkoutPage/recordedWorkoutPage.dart';
 import '../modalPage/customModal.dart';
-import '../workoutHistoryPage/workoutListScreen.dart';
-import 'widgets/workoutScreen.dart';
+import './widgets/workoutScreen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -26,7 +26,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     const List<Widget> _pages = [
       WorkOutScreen(),
-      ListOfWorkouts(),
+      RecordedWorkoutScreen(),
     ];
 
     return Scaffold(

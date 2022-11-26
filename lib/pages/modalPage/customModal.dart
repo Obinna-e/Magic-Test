@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
 
 import 'package:magic_seniordev_test/pages/modalPage/widgets/workoutList.dart';
 import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
@@ -36,86 +37,81 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
 
     return Consumer2<WorkOutDataProvider, RecordedWorkOutProvider>(
         builder: (context, data, data2, child) {
-      return SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: Column(
-            children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: ElevatedButton(
-                    onPressed: () {
-                      for (var i = 0; i < data.selectedWorkouts.length; i++) {
-                        data2.addWorkout(RecordedWorkOutModel(
-                            workout: data.selectedWorkouts[i],
-                            repetition: _reps,
-                            weigth: _weight,
-                            set: _set));
-                      }
-
-                      Navigator.pop(context);
-                      data.clearWorkout();
-                    },
-                    child: const Text('Finish')),
-              ),
-              const Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  'WorkOut Name',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-              ),
-              EditWorkout(
-                callBack: (val) {
-                  setState(() {
-                    _weight = val;
-                    _reps = val;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 100,
-              ),
-              Padding(
-                padding: defaultPadding,
-                child: Container(
-                  width: width * 0.98,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.lightBlue[100]),
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return SelectableWorkout(
-                                height: height, width: width);
-                          });
-                    },
-                    child: const Text(
-                      'Add Exercises',
-                      style: TextStyle(color: Colors.blue),
-                    ),
+      return Container(
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(25.0),
+                topRight: Radius.circular(25.0))),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Column(
+              children: [
+                Align(
+                    alignment: Alignment.topRight,
+                    child: CustomButton(
+                      title: 'Finish',
+                      width: width * 0.2,
+                      onTap: () {
+                        for (var i = 0; i < data.selectedWorkouts.length; i++) {
+                          data2.addWorkout(RecordedWorkOutModel(
+                              workout: data.selectedWorkouts[i],
+                              repetition: _reps,
+                              weigth: _weight,
+                              set: _set));
+                        }
+                        Navigator.pop(context);
+                        data.clearWorkout();
+                      },
+                    )),
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'New Workout',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
-              ),
-              Padding(
-                padding: defaultPadding,
-                child: SizedBox(
-                  width: width * 0.98,
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.deepOrange[100]),
-                      onPressed: () {
-                        data.clearWorkout();
-                        Navigator.pop(context);
-                      },
-                      child: const Text(
-                        'Cancel Workout',
-                        style: TextStyle(color: Colors.red),
-                      )),
+                EditWorkout(
+                  callBack: (val) {
+                    setState(() {
+                      _weight = val;
+                      _reps = val;
+                    });
+                  },
                 ),
-              ),
-            ],
+                const SizedBox(
+                  height: 20,
+                ),
+                CustomButton(
+                  width: width * 0.98,
+                  title: 'Add Exercises',
+                  textColor: Colors.blue,
+                  buttonColor: Colors.lightBlue[100],
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return SelectableWorkout(
+                              height: height, width: width);
+                        });
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 15.0),
+                  child: CustomButton(
+                    width: width * 0.98,
+                    title: 'Cancel Workout',
+                    textColor: Colors.red,
+                    buttonColor: Colors.deepOrange[100],
+                    onTap: () {
+                      data.clearWorkout();
+                      Navigator.pop(context);
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );

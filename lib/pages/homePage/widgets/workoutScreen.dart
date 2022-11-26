@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 import 'package:magic_seniordev_test/constants/styles.dart';
+import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
 import '../../modalPage/customModal.dart';
 import 'popularWorkOuts.dart';
 
@@ -31,18 +32,20 @@ class WorkOutScreen extends StatelessWidget {
         ),
         Padding(
           padding: defaultPadding,
-          child: Container(
-            width: width * 0.99,
-            child: ElevatedButton(
-                onPressed: () {
+          child: SizedBox(
+              width: width * 0.99,
+              child: CustomButton(
+                title: 'Create New Workout',
+                width: width * 0.98,
+                onTap: () {
                   showModalBottomSheet(
                       context: context,
+                      backgroundColor: Colors.transparent,
                       builder: (context) {
-                        return ModalBottomSheet();
+                        return const ModalBottomSheet();
                       });
                 },
-                child: Text('Create new workout')),
-          ),
+              )),
         ),
         const Padding(
           padding: defaultPadding,

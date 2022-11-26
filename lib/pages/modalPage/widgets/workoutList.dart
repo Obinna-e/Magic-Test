@@ -25,95 +25,90 @@ class EditWorkout extends StatelessWidget {
         itemCount: workoutProvider.selectedWorkouts.length,
         itemBuilder: (context, index) {
           final workout = workoutProvider.selectedWorkouts[index];
-
-          // gesture detection
-          return GestureDetector(
-            onLongPress: () => workoutProvider.removeWorkout(workout),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: defaultPadding,
-                  child: Text(
-                    workout.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: defaultPadding,
+                child: Text(
+                  workout.title,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 20),
                 ),
-                Row(
-                  children: [
-                    Column(
-                      children: [
-                        const Padding(
-                          padding: defaultPadding,
-                          child: Text('Set'),
-                        ),
-                        Text('${index + 1}'),
-                      ],
-                    ),
-                    const Spacer(),
-                    Column(
-                      children: [
-                        const Padding(
-                          padding: defaultPadding,
-                          child: Text('kg'),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          width: 100,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            onChanged: (value) {
-                              ModalBottomSheet.of(context)?.weight = value;
-                            },
-                            decoration: const InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
-                              hintText: 'Enter Weight',
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
-                              ),
+              ),
+              Row(
+                children: [
+                  Column(
+                    children: [
+                      const Padding(
+                        padding: defaultPadding,
+                        child: Text('Set'),
+                      ),
+                      Text('${index + 1}'),
+                    ],
+                  ),
+                  const Spacer(),
+                  Column(
+                    children: [
+                      const Padding(
+                        padding: defaultPadding,
+                        child: Text('kg'),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        width: 100,
+                        child: TextField(
+                          keyboardType: TextInputType.number,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          onChanged: (value) {
+                            ModalBottomSheet.of(context)?.weight = value;
+                          },
+                          decoration: const InputDecoration(
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
+                            hintText: 'Enter Weight',
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    const Spacer(),
-                    Column(
-                      children: [
-                        const Padding(
-                          padding: defaultPadding,
-                          child: Text('Reps'),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          width: 100,
-                          child: TextField(
-                            onChanged: (value) {
-                              reps = value;
-                              ModalBottomSheet.of(context)?.rep = value;
-                            },
-                            decoration: const InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
-                              hintText: 'Enter Reps',
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
-                              ),
+                      ),
+                    ],
+                  ),
+                  const Spacer(),
+                  Column(
+                    children: [
+                      const Padding(
+                        padding: defaultPadding,
+                        child: Text('Reps'),
+                      ),
+                      SizedBox(
+                        height: 30,
+                        width: 100,
+                        child: TextField(
+                          onChanged: (value) {
+                            reps = value;
+                            ModalBottomSheet.of(context)?.rep = value;
+                          },
+                          decoration: const InputDecoration(
+                            contentPadding:
+                                EdgeInsets.symmetric(horizontal: 10),
+                            hintText: 'Enter Reps',
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8.0)),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                )
-              ],
-            ),
+                      ),
+                    ],
+                  ),
+                ],
+              )
+            ],
           );
         },
       );
