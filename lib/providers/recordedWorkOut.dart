@@ -6,22 +6,24 @@ import 'package:magic_seniordev_test/models/workoutModel.dart';
 import 'package:magic_seniordev_test/pages/homePage/widgets/workouts.dart';
 
 class RecordedWorkOutProvider with ChangeNotifier {
-  List<WorkoutModel> _recordedworkouts = [];
+  List<List<UnmodifiableListView>> recordedworkouts = [];
 
-  UnmodifiableListView<WorkoutModel> get recordedworkouts =>
-      UnmodifiableListView(_recordedworkouts);
-
-  void addWorkout(WorkoutModel workout) {
-    _recordedworkouts.add(workout);
+  void addWorkout(List<UnmodifiableListView<WorkoutModel>> workout) {
+    recordedworkouts.add(workout);
     notifyListeners();
   }
 
-  void removeWorkout(WorkoutModel workout) {
-    _recordedworkouts.remove(workout);
+  // void removeWorkout(List<UnmodifiableListView> workout, int index) {
+  //   recordedworkouts[index].remove(workout);
+  //   notifyListeners();
+  // }
+
+  void removeWorkout(int index) {
+    recordedworkouts.removeAt(index);
     notifyListeners();
   }
 
-  void clearWorkout() {
-    _recordedworkouts.clear();
+  void clearWorkout(int index) {
+    recordedworkouts[index].clear();
   }
 }

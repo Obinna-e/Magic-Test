@@ -55,11 +55,10 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       title: 'Finish',
                       width: width * 0.2,
                       onTap: () {
-                        for (var i = 0; i < data.selectedWorkouts.length; i++) {
-                          data2.addWorkout(
-                            data.selectedWorkouts[i],
-                          );
-                        }
+                        data2.addWorkout(
+                          [data.selectedWorkouts],
+                        );
+
                         Navigator.pop(context);
                         data.clearWorkout();
                       },
