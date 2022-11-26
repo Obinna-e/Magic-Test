@@ -26,7 +26,8 @@ class RecordedWorkOutProvider extends ChangeNotifier {
   // }
 
   void addWorkout(List<WorkoutModel> workout) {
-    recordedWorkouts.add(List.from(workout));
+    List<WorkoutModel> newWorkout = List.from(workout);
+    recordedWorkouts.add(newWorkout);
     notifyListeners();
   }
 

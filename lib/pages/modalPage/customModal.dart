@@ -9,6 +9,7 @@ import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/styles.dart';
+import '../../providers/userWorkOut.dart';
 import 'widgets/selectableWorkout.dart';
 
 class ModalBottomSheet extends StatefulWidget {
@@ -29,7 +30,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Consumer2<WorkOutDataProvider, RecordedWorkOutProvider>(
+    return Consumer2<WorkOutDataProvider, UserWorkOutDataProvider>(
         builder: (context, data, data2, child) {
       return Container(
         decoration: const BoxDecoration(
@@ -48,10 +49,19 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       title: 'Finish',
                       width: width * 0.2,
                       onTap: () {
-                        // data.addWorkout();
+                        for (var workout in data2.userEditingWorkout) {
+                          data2.addRecordedWorkout([
+                            WorkoutModel(
+                              title: workout.title,
+                              isSelected: workout.isSelected,
+                              weight: workout.weight,
+                              reps: workout.reps,
+                            )
+                          ]);
+                        }
 
-                        data2.addWorkout(data.userWorkouts);
-                        data.clearWorkout();
+                        data2.userEditingWorkout.clear();
+                        data.toggleDeselect();
 
                         Navigator.pop(context);
                       },
@@ -89,7 +99,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     textColor: Colors.red,
                     buttonColor: Colors.deepOrange[100],
                     onTap: () {
-                      data.clearWorkout();
+                      data2.userEditingWorkout.clear();
                       Navigator.pop(context);
                     },
                   ),
