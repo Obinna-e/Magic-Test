@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
 import 'package:magic_seniordev_test/pages/modalPage/widgets/editWorkoutPage.dart';
+import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 import '../../providers/userWorkOut.dart';
@@ -18,8 +19,8 @@ class ModalBottomSheet extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Consumer2<WorkOutDataProvider, UserWorkOutDataProvider>(
-        builder: (context, data, data2, child) {
+    return Consumer3<WorkOutDataProvider, UserWorkOutDataProvider,
+        EditWorkOutDataProvider>(builder: (context, data, data2, data3, child) {
       return Container(
         decoration: const BoxDecoration(
             color: Colors.white,
@@ -45,7 +46,7 @@ class ModalBottomSheet extends StatelessWidget {
 
                           Navigator.pop(context);
                         } else {
-                          //TODO: Use update feature here
+                          // data2.updateWorkout(workout, title, reps, weight)
                         }
                       },
                     )),
@@ -69,41 +70,27 @@ class ModalBottomSheet extends StatelessWidget {
                   title: 'Add Exercises',
                   textColor: Colors.blue,
                   buttonColor: Colors.lightBlue[100],
-                  onTap: () async {
+                  onTap: () {
                     if (isAnEdit) {
-                      bool? result = await showDialog(
+                      for (var workout in data2.userRecordedWorkouts[index!]) {
+                        data3.toggleSelectedStatus(workout);
+                      }
+                      showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return isAnEdit
-                                ? SelectableWorkout(
-                                    height: height,
-                                    width: width,
-                                    isAnEdit: true)
-                                : SelectableWorkout(
-                                    height: height,
-                                    width: width,
-                                    isAnEdit: false);
+                            return SelectableWorkout(
+                                height: height, width: width, isAnEdit: true);
                           });
-                      result;
 
-                      if (result == false || result == null) {
-                        await data.toggleDeselect();
-                        print('object');
-                      }
+                      print('Is an edit');
                     } else {
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
-                            return isAnEdit
-                                ? SelectableWorkout(
-                                    height: height,
-                                    width: width,
-                                    isAnEdit: true)
-                                : SelectableWorkout(
-                                    height: height,
-                                    width: width,
-                                    isAnEdit: false);
+                            return SelectableWorkout(
+                                height: height, width: width, isAnEdit: false);
                           });
+                      print('Not Edit');
                     }
                   },
                 ),
@@ -120,7 +107,7 @@ class ModalBottomSheet extends StatelessWidget {
                         data.toggleDeselect();
                         Navigator.pop(context);
                       } else {
-                        data.toggleDeselect();
+                        data3.toggleDeselect();
                         Navigator.pop(context);
                       }
                     },

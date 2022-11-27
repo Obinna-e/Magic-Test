@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:magic_seniordev_test/models/workoutModel.dart';
+import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:magic_seniordev_test/providers/userWorkOut.dart';
 
 import 'package:magic_seniordev_test/providers/workOutData.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 class WorkoutItems extends StatelessWidget {
   const WorkoutItems(
       {Key? key,
+      required this.isAnEdit,
       required this.img,
       required this.title,
       required this.subtitle,
@@ -20,11 +22,14 @@ class WorkoutItems extends StatelessWidget {
   final String subtitle;
   final bool isSelected;
   final int index;
+  final bool isAnEdit;
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<WorkOutDataProvider, UserWorkOutDataProvider>(
-        builder: (context, data, data2, child) {
+    return Consumer3<WorkOutDataProvider, UserWorkOutDataProvider,
+        EditWorkOutDataProvider>(builder: (context, data, data2, data3, child) {
+      final workoutdata =
+          isAnEdit ? data3.workouts[index] : data.workouts[index];
       return ListTile(
         leading: ConstrainedBox(
           constraints: const BoxConstraints(
@@ -41,26 +46,30 @@ class WorkoutItems extends StatelessWidget {
         ),
         title: Text(title),
         subtitle: Text(subtitle),
-        trailing: data.workouts[index].isSelected
+        trailing: workoutdata.isSelected
             ? const Icon(Icons.check_circle, color: Colors.blue)
             : const Icon(
                 Icons.check_circle_outline,
                 color: Colors.grey,
               ),
         onTap: () {
-          data.workouts[index].toggle();
-          if (data.workouts[index].isSelected == true) {
-            data2.addWorkout(WorkoutModel(
-              title: data.workouts[index].title,
-              set: data.workouts[index].set,
-              reps: data.workouts[index].reps,
-              weight: data.workouts[index].weight,
-              isSelected: data.workouts[index].isSelected,
-              img: data.workouts[index].img,
-              subtitle: data.workouts[index].subtitle,
-            ));
-          } else if (data.workouts[index].isSelected == false) {
-            data2.removeWorkout(data.workouts[index].title);
+          workoutdata.toggle();
+          if (!isAnEdit) {
+            if (workoutdata.isSelected == true) {
+              data2.addWorkout(WorkoutModel(
+                title: data.workouts[index].title,
+                set: data.workouts[index].set,
+                reps: data.workouts[index].reps,
+                weight: data.workouts[index].weight,
+                isSelected: data.workouts[index].isSelected,
+                img: data.workouts[index].img,
+                subtitle: data.workouts[index].subtitle,
+              ));
+            } else if (data.workouts[index].isSelected == false) {
+              data2.removeWorkout(data.workouts[index].title);
+            }
+          } else {
+            print('is an edit');
           }
         },
       );

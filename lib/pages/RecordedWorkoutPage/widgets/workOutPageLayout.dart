@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
@@ -16,7 +17,7 @@ class WorkoutPageLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<UserWorkOutDataProvider, WorkOutDataProvider>(
+    return Consumer2<UserWorkOutDataProvider, EditWorkOutDataProvider>(
         builder: (context, data, data2, child) {
       return Padding(
         padding: defaultPadding,
@@ -51,7 +52,7 @@ class WorkoutPageLayout extends StatelessWidget {
                                   isAnEdit: true,
                                   index: containerIndex,
                                 );
-                              });
+                              }).whenComplete(() => data2.toggleDeselect());
 
                           for (var workout
                               in data.userRecordedWorkouts[containerIndex]) {

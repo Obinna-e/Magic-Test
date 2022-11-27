@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:provider/provider.dart';
 
 import 'workoutDialog.dart';
@@ -18,7 +19,9 @@ class SelectableWorkout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WorkOutDataProvider>(builder: (context, data, child) {
+    return Consumer2<WorkOutDataProvider, EditWorkOutDataProvider>(
+        builder: (context, data, data2, child) {
+      final workout = isAnEdit ? data2.workouts : data.workouts;
       return Dialog(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -31,13 +34,14 @@ class SelectableWorkout extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ListView.builder(
-                      itemCount: data.workouts.length,
+                      itemCount: workout.length,
                       itemBuilder: (BuildContext context, int index) {
                         return WorkoutItems(
-                            img: data.workouts[index].img!,
-                            title: data.workouts[index].title,
-                            subtitle: data.workouts[index].subtitle!,
-                            isSelected: data.workouts[index].isSelected,
+                            isAnEdit: isAnEdit,
+                            img: workout[index].img!,
+                            title: workout[index].title,
+                            subtitle: workout[index].subtitle!,
+                            isSelected: workout[index].isSelected,
                             index: index);
                       },
                     ),
