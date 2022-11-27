@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:provider/provider.dart';
 
-import 'workoutDialog.dart';
+import '../../../providers/editingWorkout.dart';
+import './workoutDialog.dart';
 import '../../../providers/workOutData.dart';
 
 class SelectableWorkout extends StatelessWidget {

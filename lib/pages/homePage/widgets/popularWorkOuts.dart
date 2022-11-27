@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'workouts.dart';
+import './workouts.dart';
 
 class PopularWorkOuts extends StatelessWidget {
   const PopularWorkOuts({

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'package:magic_seniordev_test/constants/styles.dart';
 import 'package:provider/provider.dart';
-import '../../providers/userWorkOut.dart';
+
+import '../../constants/styles.dart';
+import '../../providers/userWorkout.dart';
 import './widgets/workOutPageLayout.dart';
 
 class RecordedWorkoutScreen extends StatelessWidget {

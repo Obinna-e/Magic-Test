@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/providers/userWorkOut.dart';
-import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
+
+import './providers/userWorkout.dart';
+import './providers/workOutData.dart';
 import './pages/homePage/homePage.dart';
 import './providers/editingWorkout.dart';
 
