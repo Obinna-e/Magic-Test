@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'package:magic_seniordev_test/constants/styles.dart';
-import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:provider/provider.dart';
+
+import '../../../constants/styles.dart';
+import '../../../providers/editingWorkout.dart';
 import '../../../providers/userWorkOut.dart';
 
 typedef void StringCallBack(String val);

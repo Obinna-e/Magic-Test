@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/models/workoutModel.dart';
-import 'package:magic_seniordev_test/providers/editingWorkout.dart';
-import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
+import '../../../models/workoutModel.dart';
+import '../../../providers/editingWorkout.dart';
 import '../../../constants/styles.dart';
 import '../../../providers/userWorkOut.dart';
 import '../../modalPage/customModal.dart';
