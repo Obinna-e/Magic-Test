@@ -11,6 +11,7 @@ import 'widgets/selectableWorkout.dart';
 class ModalBottomSheet extends StatelessWidget {
   final bool isAnEdit;
   final int? index;
+
   const ModalBottomSheet({Key? key, required this.isAnEdit, this.index})
       : super(key: key);
 
