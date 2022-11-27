@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
@@ -29,10 +28,8 @@ class UserWorkOutDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateWorkout(WorkoutModel workout, String title, int reps, int weight) {
-    workout.title = title;
-    workout.reps = reps;
-    workout.weight = weight;
+  void editRecordedWorkout(List<WorkoutModel> workout, index) {
+    userRecordedWorkouts[index] = [...workout];
 
     notifyListeners();
   }

@@ -2,29 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:magic_seniordev_test/constants/styles.dart';
+import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/userWorkOut.dart';
 
 typedef void StringCallBack(String val);
 
 class EditWorkout extends StatelessWidget {
+  final bool isAnEdit;
+  final int? containerIndex;
   const EditWorkout({
     Key? key,
+    required this.isAnEdit,
+    this.containerIndex,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserWorkOutDataProvider>(
-      builder: ((context, workoutProvider, child) {
+    return Consumer2<UserWorkOutDataProvider, EditWorkOutDataProvider>(
+      builder: ((context, data, data2, child) {
         return Column(
           children: [
             ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: workoutProvider.userEditingWorkout.length,
+              itemCount: isAnEdit
+                  ? data2.userEditingWorkout.length
+                  : data.userEditingWorkout.length,
               itemBuilder: (context, index) {
-                final workout = workoutProvider.userEditingWorkout[index];
+                final workout = isAnEdit
+                    ? data2.userEditingWorkout[index]
+                    : data.userEditingWorkout[index];
+
                 workout.set = index + 1;
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

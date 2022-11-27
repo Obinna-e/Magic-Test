@@ -20,16 +20,4 @@ class WorkoutModel {
   void toggle() {
     isSelected = !isSelected;
   }
-
-  void setNumber(int amount) {
-    set = amount;
-  }
-
-  void setReps(int amount) {
-    reps = amount;
-  }
-
-  void setWeight(int amount) {
-    weight = amount;
-  }
 }

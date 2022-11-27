@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../models/workoutModel.dart';
 
-class WorkOutDataProvider extends ChangeNotifier {
+class EditWorkOutDataProvider extends ChangeNotifier {
   List<WorkoutModel> workouts = [
     WorkoutModel(
       img: 'barbell_row.png',
@@ -54,21 +54,36 @@ class WorkOutDataProvider extends ChangeNotifier {
     ),
   ];
 
-  void toggleSelectedStatus(WorkoutModel workout) {
+  List<WorkoutModel> userEditingWorkout = [];
+
+  void addWorkout(WorkoutModel workout) {
+    userEditingWorkout.add(workout);
+    notifyListeners();
+  }
+
+  void removeWorkout(String title) {
+    userEditingWorkout.removeWhere((element) => element.title == title);
+    notifyListeners();
+  }
+
+  Future<bool> toggleSelectedStatus(WorkoutModel workout) {
     for (var item in workouts) {
       if (item.title == workout.title) {
         item.isSelected = true;
       }
     }
+    var finished = Completer<bool>();
 
     notifyListeners();
+    return finished.future;
   }
 
-  void toggleDeselect() {
+  Future<bool> toggleDeselect() {
     for (var item in workouts) {
       item.isSelected = false;
     }
-
+    var finished = Completer<bool>();
     notifyListeners();
+    return finished.future;
   }
 }
