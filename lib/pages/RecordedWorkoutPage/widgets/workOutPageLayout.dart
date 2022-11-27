@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/styles.dart';
@@ -15,7 +16,8 @@ class WorkoutPageLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserWorkOutDataProvider>(builder: (context, data, child) {
+    return Consumer2<UserWorkOutDataProvider, WorkOutDataProvider>(
+        builder: (context, data, data2, child) {
       return Padding(
         padding: defaultPadding,
         child: Container(
@@ -50,6 +52,11 @@ class WorkoutPageLayout extends StatelessWidget {
                                   index: containerIndex,
                                 );
                               });
+
+                          for (var workout
+                              in data.userRecordedWorkouts[containerIndex]) {
+                            data2.toggleSelectedStatus(workout);
+                          }
                         },
                         icon: const Icon(
                           Icons.edit,

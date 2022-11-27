@@ -57,7 +57,7 @@ class ModalBottomSheet extends StatelessWidget {
                   ),
                 ),
                 isAnEdit
-                    ? const EditWorkout(isAnEdit: true)
+                    ? EditWorkout(isAnEdit: true, containerIndex: index)
                     : const EditWorkout(
                         isAnEdit: false,
                       ),
@@ -69,18 +69,42 @@ class ModalBottomSheet extends StatelessWidget {
                   title: 'Add Exercises',
                   textColor: Colors.blue,
                   buttonColor: Colors.lightBlue[100],
-                  onTap: () {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return isAnEdit
-                              ? SelectableWorkout(
-                                  height: height, width: width, isAnEdit: true)
-                              : SelectableWorkout(
-                                  height: height,
-                                  width: width,
-                                  isAnEdit: false);
-                        });
+                  onTap: () async {
+                    if (isAnEdit) {
+                      bool? result = await showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return isAnEdit
+                                ? SelectableWorkout(
+                                    height: height,
+                                    width: width,
+                                    isAnEdit: true)
+                                : SelectableWorkout(
+                                    height: height,
+                                    width: width,
+                                    isAnEdit: false);
+                          });
+                      result;
+
+                      if (result == false || result == null) {
+                        await data.toggleDeselect();
+                        print('object');
+                      }
+                    } else {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return isAnEdit
+                                ? SelectableWorkout(
+                                    height: height,
+                                    width: width,
+                                    isAnEdit: true)
+                                : SelectableWorkout(
+                                    height: height,
+                                    width: width,
+                                    isAnEdit: false);
+                          });
+                    }
                   },
                 ),
                 Padding(
@@ -96,6 +120,7 @@ class ModalBottomSheet extends StatelessWidget {
                         data.toggleDeselect();
                         Navigator.pop(context);
                       } else {
+                        data.toggleDeselect();
                         Navigator.pop(context);
                       }
                     },

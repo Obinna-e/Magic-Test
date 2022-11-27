@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'package:flutter/foundation.dart';
 
@@ -60,18 +61,22 @@ class WorkOutDataProvider extends ChangeNotifier {
   // List<WorkoutModel> get selectedWorkout =>
   //     _workouts.where((workout) => workout.isSelected == true).toList();
 
-  bool toggleSelectedStatus(WorkoutModel workout) {
-    workout.isSelected = !workout.isSelected;
-
-    notifyListeners();
-    return workout.isSelected;
-  }
-
-  void toggleDeselect() {
-    for (var workout in workouts) {
-      workout.isSelected = false;
+  void toggleSelectedStatus(WorkoutModel workout) {
+    for (var item in workouts) {
+      if (item.title == workout.title) {
+        item.isSelected = true;
+      }
     }
 
     notifyListeners();
+  }
+
+  Future<bool> toggleDeselect() {
+    for (var item in workouts) {
+      item.isSelected = false;
+    }
+    var finished = Completer<bool>();
+    notifyListeners();
+    return finished.future;
   }
 }

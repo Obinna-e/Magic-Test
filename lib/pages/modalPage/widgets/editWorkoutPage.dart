@@ -9,24 +9,33 @@ typedef void StringCallBack(String val);
 
 class EditWorkout extends StatelessWidget {
   final bool isAnEdit;
+  final int? containerIndex;
   const EditWorkout({
     Key? key,
     required this.isAnEdit,
+    this.containerIndex,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Consumer<UserWorkOutDataProvider>(
-      builder: ((context, workoutProvider, child) {
+      builder: ((context, data, child) {
         return Column(
           children: [
             ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: workoutProvider.userEditingWorkout.length,
+              itemCount: isAnEdit
+                  ? data.userRecordedWorkouts[containerIndex!].length
+                  : data.userEditingWorkout.length,
               itemBuilder: (context, index) {
-                final workout = workoutProvider.userEditingWorkout[index];
-                workout.set = index + 1;
+                final workout = isAnEdit
+                    ? data.userRecordedWorkouts[containerIndex!][index]
+                    : data.userEditingWorkout[index];
+
+                if (!isAnEdit) {
+                  workout.set = index + 1;
+                }
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
