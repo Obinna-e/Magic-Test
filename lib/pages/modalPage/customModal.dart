@@ -8,6 +8,8 @@ import '../../providers/userWorkOut.dart';
 import 'widgets/selectableWorkout.dart';
 
 class ModalBottomSheet extends StatelessWidget {
+  const ModalBottomSheet({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
