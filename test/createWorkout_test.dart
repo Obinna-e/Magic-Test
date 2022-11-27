@@ -18,20 +18,23 @@ void main() {
     );
   }
 
-  testWidgets('ModalBottomSheet has isAnEdit and index', (tester) async {
+  testWidgets('ModalBorromSheet Loads with providers', (tester) async {
     await tester.pumpWidget(MultiProvider(
-      providers: [
-        ChangeNotifierProvider<WorkOutDataProvider>(
-            create: (context) => WorkOutDataProvider()),
-        ChangeNotifierProvider<UserWorkOutDataProvider>(
-            create: (context) => UserWorkOutDataProvider()),
-        ChangeNotifierProvider<EditWorkOutDataProvider>(
-            create: (context) => EditWorkOutDataProvider()),
-      ],
-      child: MediaQuery(
-        data: MediaQueryData(),
-        child: createWidgetForTesting(child: MyHomePage()),
-      ),
-    ));
+        providers: [
+          ChangeNotifierProvider<WorkOutDataProvider>(
+              create: (context) => WorkOutDataProvider()),
+          ChangeNotifierProvider<UserWorkOutDataProvider>(
+              create: (context) => UserWorkOutDataProvider()),
+          ChangeNotifierProvider<EditWorkOutDataProvider>(
+              create: (context) => EditWorkOutDataProvider()),
+        ],
+        child: MediaQuery(
+          data: MediaQueryData(),
+          child: createWidgetForTesting(
+              child: ModalBottomSheet(
+            isAnEdit: true,
+          )),
+        )));
+    expect(ModalBottomSheet(isAnEdit: true).isAnEdit, true);
   });
 }
