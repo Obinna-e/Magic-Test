@@ -54,7 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
           showModalBottomSheet(
               context: context,
               builder: (context) {
-                return ModalBottomSheet();
+                return const ModalBottomSheet(
+                  isAnEdit: false,
+                );
               });
         },
         child: const Icon(Icons.add),

@@ -5,8 +5,10 @@ import 'workoutDialog.dart';
 import '../../../providers/workOutData.dart';
 
 class SelectableWorkout extends StatelessWidget {
+  final bool isAnEdit;
   const SelectableWorkout({
     Key? key,
+    required this.isAnEdit,
     required this.height,
     required this.width,
   }) : super(key: key);

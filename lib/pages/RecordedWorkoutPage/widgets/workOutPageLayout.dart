@@ -3,16 +3,13 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/styles.dart';
 import '../../../providers/userWorkOut.dart';
+import '../../modalPage/customModal.dart';
 import './exerciseInfo.dart';
 
 class WorkoutPageLayout extends StatelessWidget {
-  final VoidCallback onTapDeleteIcon;
-  final VoidCallback onTapEditIcon;
   final int containerIndex;
   const WorkoutPageLayout({
     Key? key,
-    required this.onTapDeleteIcon,
-    required this.onTapEditIcon,
     required this.containerIndex,
   }) : super(key: key);
 
@@ -44,12 +41,23 @@ class WorkoutPageLayout extends StatelessWidget {
                     ),
                     const Spacer(),
                     IconButton(
-                        onPressed: onTapEditIcon,
+                        onPressed: () {
+                          showModalBottomSheet(
+                              context: context,
+                              builder: (context) {
+                                return ModalBottomSheet(
+                                  isAnEdit: true,
+                                  index: containerIndex,
+                                );
+                              });
+                        },
                         icon: const Icon(
                           Icons.edit,
                         )),
                     IconButton(
-                        onPressed: onTapDeleteIcon,
+                        onPressed: () {
+                          data.removeRecordedWorkout(containerIndex);
+                        },
                         icon: const Icon(
                           Icons.delete,
                           color: Colors.red,

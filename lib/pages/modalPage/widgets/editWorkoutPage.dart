@@ -8,8 +8,10 @@ import '../../../providers/userWorkOut.dart';
 typedef void StringCallBack(String val);
 
 class EditWorkout extends StatelessWidget {
+  final bool isAnEdit;
   const EditWorkout({
     Key? key,
+    required this.isAnEdit,
   }) : super(key: key);
 
   @override

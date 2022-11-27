@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:magic_seniordev_test/constants/styles.dart';
 import 'package:provider/provider.dart';
 import '../../providers/userWorkOut.dart';
-import '../modalPage/customModal.dart';
 import './widgets/workOutPageLayout.dart';
 
 class RecordedWorkoutScreen extends StatelessWidget {
@@ -29,16 +28,6 @@ class RecordedWorkoutScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, index) {
                 return WorkoutPageLayout(
                   containerIndex: index,
-                  onTapDeleteIcon: () {
-                    data.removeRecordedWorkout(index);
-                  },
-                  onTapEditIcon: () {
-                    showModalBottomSheet(
-                        context: context,
-                        builder: (context) {
-                          return const ModalBottomSheet();
-                        });
-                  },
                 );
               },
             ),

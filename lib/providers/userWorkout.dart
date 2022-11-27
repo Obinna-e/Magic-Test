@@ -29,7 +29,8 @@ class UserWorkOutDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateWorkout(WorkoutModel workout, String title, int reps, int weight) {
+  void updateWorkout(
+      WorkoutModel workout, String title, int reps, int weight, int index) {
     workout.title = title;
     workout.reps = reps;
     workout.weight = weight;

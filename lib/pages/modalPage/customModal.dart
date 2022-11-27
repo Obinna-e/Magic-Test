@@ -8,7 +8,10 @@ import '../../providers/userWorkOut.dart';
 import 'widgets/selectableWorkout.dart';
 
 class ModalBottomSheet extends StatelessWidget {
-  const ModalBottomSheet({Key? key}) : super(key: key);
+  final bool isAnEdit;
+  final int? index;
+  const ModalBottomSheet({Key? key, required this.isAnEdit, this.index})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +34,33 @@ class ModalBottomSheet extends StatelessWidget {
                 Align(
                     alignment: Alignment.topRight,
                     child: CustomButton(
-                      title: 'Finish',
+                      title: isAnEdit ? 'Update' : 'Finish',
                       width: width * 0.2,
                       onTap: () {
-                        data2.addRecordedWorkout(data2.userEditingWorkout);
+                        if (!isAnEdit) {
+                          data2.addRecordedWorkout(data2.userEditingWorkout);
 
-                        data2.userEditingWorkout.clear();
-                        data.toggleDeselect();
+                          data2.userEditingWorkout.clear();
+                          data.toggleDeselect();
 
-                        Navigator.pop(context);
+                          Navigator.pop(context);
+                        } else {
+                          //TODO: Use update feature here
+                        }
                       },
                     )),
-                const Align(
+                Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    'New Workout',
+                    isAnEdit ? 'Edit Workout' : 'New Workout',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
-                const EditWorkout(),
+                isAnEdit
+                    ? const EditWorkout(isAnEdit: true)
+                    : const EditWorkout(
+                        isAnEdit: false,
+                      ),
                 const SizedBox(
                   height: 20,
                 ),
@@ -62,8 +73,13 @@ class ModalBottomSheet extends StatelessWidget {
                     showDialog(
                         context: context,
                         builder: (BuildContext context) {
-                          return SelectableWorkout(
-                              height: height, width: width);
+                          return isAnEdit
+                              ? SelectableWorkout(
+                                  height: height, width: width, isAnEdit: true)
+                              : SelectableWorkout(
+                                  height: height,
+                                  width: width,
+                                  isAnEdit: false);
                         });
                   },
                 ),
@@ -75,9 +91,13 @@ class ModalBottomSheet extends StatelessWidget {
                     textColor: Colors.red,
                     buttonColor: Colors.deepOrange[100],
                     onTap: () {
-                      data2.userEditingWorkout.clear();
-                      data.toggleDeselect();
-                      Navigator.pop(context);
+                      if (!isAnEdit) {
+                        data2.userEditingWorkout.clear();
+                        data.toggleDeselect();
+                        Navigator.pop(context);
+                      } else {
+                        Navigator.pop(context);
+                      }
                     },
                   ),
                 ),
