@@ -54,6 +54,18 @@ class EditWorkOutDataProvider extends ChangeNotifier {
     ),
   ];
 
+  List<WorkoutModel> userEditingWorkout = [];
+
+  void addWorkout(WorkoutModel workout) {
+    userEditingWorkout.add(workout);
+    notifyListeners();
+  }
+
+  void removeWorkout(String title) {
+    userEditingWorkout.removeWhere((element) => element.title == title);
+    notifyListeners();
+  }
+
   Future<bool> toggleSelectedStatus(WorkoutModel workout) {
     for (var item in workouts) {
       if (item.title == workout.title) {

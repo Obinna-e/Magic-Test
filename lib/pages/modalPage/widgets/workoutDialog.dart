@@ -7,15 +7,16 @@ import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
 class WorkoutItems extends StatelessWidget {
-  const WorkoutItems(
-      {Key? key,
-      required this.isAnEdit,
-      required this.img,
-      required this.title,
-      required this.subtitle,
-      required this.isSelected,
-      required this.index})
-      : super(key: key);
+  const WorkoutItems({
+    Key? key,
+    required this.isAnEdit,
+    required this.img,
+    required this.title,
+    required this.subtitle,
+    required this.isSelected,
+    required this.index,
+    this.containerIndex,
+  }) : super(key: key);
 
   final String img;
   final String title;
@@ -23,6 +24,7 @@ class WorkoutItems extends StatelessWidget {
   final bool isSelected;
   final int index;
   final bool isAnEdit;
+  final int? containerIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +71,19 @@ class WorkoutItems extends StatelessWidget {
               data2.removeWorkout(data.workouts[index].title);
             }
           } else {
-            print('is an edit');
+            if (workoutdata.isSelected == true) {
+              data3.addWorkout(WorkoutModel(
+                title: data.workouts[index].title,
+                set: data.workouts[index].set,
+                reps: data.workouts[index].reps,
+                weight: data.workouts[index].weight,
+                isSelected: data.workouts[index].isSelected,
+                img: data.workouts[index].img,
+                subtitle: data.workouts[index].subtitle,
+              ));
+            } else if (workoutdata.isSelected == false) {
+              data3.removeWorkout(data3.workouts[index].title);
+            }
           }
         },
       );

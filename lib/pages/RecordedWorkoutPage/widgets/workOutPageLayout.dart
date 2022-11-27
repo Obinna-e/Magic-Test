@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/models/workoutModel.dart';
 import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
@@ -52,11 +53,22 @@ class WorkoutPageLayout extends StatelessWidget {
                                   isAnEdit: true,
                                   index: containerIndex,
                                 );
-                              }).whenComplete(() => data2.toggleDeselect());
+                              }).whenComplete(() {
+                            data2.toggleDeselect();
+                            data2.userEditingWorkout.clear();
+                          });
 
                           for (var workout
                               in data.userRecordedWorkouts[containerIndex]) {
                             data2.toggleSelectedStatus(workout);
+                            data2.addWorkout(
+                              WorkoutModel(
+                                  title: workout.title,
+                                  isSelected: workout.isSelected,
+                                  reps: workout.reps,
+                                  set: workout.set,
+                                  weight: workout.weight),
+                            );
                           }
                         },
                         icon: const Icon(

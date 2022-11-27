@@ -46,7 +46,15 @@ class ModalBottomSheet extends StatelessWidget {
 
                           Navigator.pop(context);
                         } else {
-                          // data2.updateWorkout(workout, title, reps, weight)
+                          if (data3.userEditingWorkout.isEmpty) {
+                            data2.removeRecordedWorkout(index!);
+                            Navigator.pop(context);
+                          } else {
+                            data2.editRecordedWorkout(
+                                data3.userEditingWorkout, index);
+                            data3.userEditingWorkout.clear();
+                            Navigator.pop(context);
+                          }
                         }
                       },
                     )),
@@ -54,7 +62,8 @@ class ModalBottomSheet extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: Text(
                     isAnEdit ? 'Edit Workout' : 'New Workout',
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
                 isAnEdit
@@ -72,17 +81,15 @@ class ModalBottomSheet extends StatelessWidget {
                   buttonColor: Colors.lightBlue[100],
                   onTap: () {
                     if (isAnEdit) {
-                      for (var workout in data2.userRecordedWorkouts[index!]) {
-                        data3.toggleSelectedStatus(workout);
-                      }
                       showDialog(
                           context: context,
                           builder: (BuildContext context) {
                             return SelectableWorkout(
-                                height: height, width: width, isAnEdit: true);
+                                height: height,
+                                width: width,
+                                isAnEdit: true,
+                                containerIndex: index);
                           });
-
-                      print('Is an edit');
                     } else {
                       showDialog(
                           context: context,
@@ -90,7 +97,6 @@ class ModalBottomSheet extends StatelessWidget {
                             return SelectableWorkout(
                                 height: height, width: width, isAnEdit: false);
                           });
-                      print('Not Edit');
                     }
                   },
                 ),
@@ -108,6 +114,7 @@ class ModalBottomSheet extends StatelessWidget {
                         Navigator.pop(context);
                       } else {
                         data3.toggleDeselect();
+                        data3.userEditingWorkout.clear();
                         Navigator.pop(context);
                       }
                     },

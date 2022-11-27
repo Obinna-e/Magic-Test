@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:magic_seniordev_test/constants/styles.dart';
+import 'package:magic_seniordev_test/providers/editingWorkout.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/userWorkOut.dart';
 
@@ -18,24 +19,23 @@ class EditWorkout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserWorkOutDataProvider>(
-      builder: ((context, data, child) {
+    return Consumer2<UserWorkOutDataProvider, EditWorkOutDataProvider>(
+      builder: ((context, data, data2, child) {
         return Column(
           children: [
             ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: isAnEdit
-                  ? data.userRecordedWorkouts[containerIndex!].length
+                  ? data2.userEditingWorkout.length
                   : data.userEditingWorkout.length,
               itemBuilder: (context, index) {
                 final workout = isAnEdit
-                    ? data.userRecordedWorkouts[containerIndex!][index]
+                    ? data2.userEditingWorkout[index]
                     : data.userEditingWorkout[index];
 
-                if (!isAnEdit) {
-                  workout.set = index + 1;
-                }
+                workout.set = index + 1;
+
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

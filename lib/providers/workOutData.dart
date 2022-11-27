@@ -64,12 +64,11 @@ class WorkOutDataProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> toggleDeselect() {
+  void toggleDeselect() {
     for (var item in workouts) {
       item.isSelected = false;
     }
-    var finished = Completer<bool>();
+
     notifyListeners();
-    return finished.future;
   }
 }

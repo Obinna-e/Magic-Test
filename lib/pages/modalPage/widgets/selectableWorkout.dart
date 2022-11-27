@@ -7,11 +7,13 @@ import '../../../providers/workOutData.dart';
 
 class SelectableWorkout extends StatelessWidget {
   final bool isAnEdit;
+  final int? containerIndex;
   const SelectableWorkout({
     Key? key,
     required this.isAnEdit,
     required this.height,
     required this.width,
+    this.containerIndex,
   }) : super(key: key);
 
   final double height;
