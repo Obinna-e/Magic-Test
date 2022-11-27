@@ -3,28 +3,13 @@ import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
 import 'package:magic_seniordev_test/models/workoutModel.dart';
 
 import 'package:magic_seniordev_test/pages/modalPage/widgets/editWorkoutPage.dart';
-import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
-import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
 import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants/styles.dart';
 import '../../providers/userWorkOut.dart';
 import 'widgets/selectableWorkout.dart';
 
-class ModalBottomSheet extends StatefulWidget {
-  const ModalBottomSheet({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<ModalBottomSheet> createState() => _ModalBottomSheetState();
-
-  static _ModalBottomSheetState? of(BuildContext context) =>
-      context.findAncestorStateOfType<_ModalBottomSheetState>();
-}
-
-class _ModalBottomSheetState extends State<ModalBottomSheet> {
+class ModalBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
@@ -49,16 +34,7 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       title: 'Finish',
                       width: width * 0.2,
                       onTap: () {
-                        for (var workout in data2.userEditingWorkout) {
-                          data2.addRecordedWorkout([
-                            WorkoutModel(
-                              title: workout.title,
-                              isSelected: workout.isSelected,
-                              weight: workout.weight,
-                              reps: workout.reps,
-                            )
-                          ]);
-                        }
+                        data2.addRecordedWorkout(data2.userEditingWorkout);
 
                         data2.userEditingWorkout.clear();
                         data.toggleDeselect();

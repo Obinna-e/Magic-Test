@@ -16,101 +16,105 @@ class EditWorkout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<UserWorkOutDataProvider>(
       builder: ((context, workoutProvider, child) {
-        return ListView.builder(
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemCount: workoutProvider.userEditingWorkout.length,
-          itemBuilder: (context, index) {
-            final workout = workoutProvider.userEditingWorkout[index];
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: defaultPadding,
-                  child: Text(
-                    workout.title,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 20),
-                  ),
-                ),
-                Row(
+        return Column(
+          children: [
+            ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: true,
+              itemCount: workoutProvider.userEditingWorkout.length,
+              itemBuilder: (context, index) {
+                final workout = workoutProvider.userEditingWorkout[index];
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
-                      children: [
-                        const Padding(
-                          padding: defaultPadding,
-                          child: Text('Set'),
-                        ),
-                        Text('${index + 1}'),
-                      ],
+                    Padding(
+                      padding: defaultPadding,
+                      child: Text(
+                        workout.title,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
                     ),
-                    const Spacer(),
-                    Column(
+                    Row(
                       children: [
-                        const Padding(
-                          padding: defaultPadding,
-                          child: Text('kg'),
+                        Column(
+                          children: [
+                            const Padding(
+                              padding: defaultPadding,
+                              child: Text('Set'),
+                            ),
+                            Text('${index + 1}'),
+                          ],
                         ),
-                        SizedBox(
-                          height: 30,
-                          width: 100,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            onChanged: (value) {
-                              workout.weight = int.tryParse(value);
-                            },
-                            decoration: const InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
-                              hintText: 'Enter Weight',
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
+                        const Spacer(),
+                        Column(
+                          children: [
+                            const Padding(
+                              padding: defaultPadding,
+                              child: Text('kg'),
+                            ),
+                            SizedBox(
+                              height: 30,
+                              width: 100,
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                onChanged: (value) {
+                                  workout.weight = int.tryParse(value);
+                                },
+                                decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
+                                  hintText: 'Enter Weight',
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                    const Spacer(),
-                    Column(
-                      children: [
-                        const Padding(
-                          padding: defaultPadding,
-                          child: Text('Reps'),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          width: 100,
-                          child: TextField(
-                            keyboardType: TextInputType.number,
-                            inputFormatters: <TextInputFormatter>[
-                              FilteringTextInputFormatter.digitsOnly
-                            ],
-                            onChanged: (value) {
-                              workout.reps = int.tryParse(value);
-                            },
-                            decoration: const InputDecoration(
-                              contentPadding:
-                                  EdgeInsets.symmetric(horizontal: 10),
-                              hintText: 'Enter Reps',
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8.0)),
+                        const Spacer(),
+                        Column(
+                          children: [
+                            const Padding(
+                              padding: defaultPadding,
+                              child: Text('Reps'),
+                            ),
+                            SizedBox(
+                              height: 30,
+                              width: 100,
+                              child: TextField(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: <TextInputFormatter>[
+                                  FilteringTextInputFormatter.digitsOnly
+                                ],
+                                onChanged: (value) {
+                                  workout.reps = int.tryParse(value);
+                                },
+                                decoration: const InputDecoration(
+                                  contentPadding:
+                                      EdgeInsets.symmetric(horizontal: 10),
+                                  hintText: 'Enter Reps',
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8.0)),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
-                    ),
+                    )
                   ],
-                )
-              ],
-            );
-          },
+                );
+              },
+            ),
+          ],
         );
       }),
     );
