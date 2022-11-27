@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:magic_seniordev_test/constants/styles.dart';
 import 'package:provider/provider.dart';
 import '../../providers/userWorkOut.dart';
+import '../modalPage/customModal.dart';
 
 class RecordedWorkoutScreen extends StatelessWidget {
   const RecordedWorkoutScreen({Key? key}) : super(key: key);
@@ -27,8 +28,16 @@ class RecordedWorkoutScreen extends StatelessWidget {
               itemBuilder: (BuildContext context, index) {
                 return WorkoutPageLayout(
                   containerIndex: index,
-                  onTap: () {
+                  onTapDeleteIcon: () {
                     data.removeRecordedWorkout(index);
+                  },
+                  onTapEditIcon: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) {
+                          return ModalBottomSheet();
+                        });
+                    print('object');
                   },
                 );
               },
@@ -41,11 +50,13 @@ class RecordedWorkoutScreen extends StatelessWidget {
 }
 
 class WorkoutPageLayout extends StatelessWidget {
-  final VoidCallback onTap;
+  final VoidCallback onTapDeleteIcon;
+  final VoidCallback onTapEditIcon;
   final int containerIndex;
   const WorkoutPageLayout({
     Key? key,
-    required this.onTap,
+    required this.onTapDeleteIcon,
+    required this.onTapEditIcon,
     required this.containerIndex,
   }) : super(key: key);
 
@@ -92,7 +103,7 @@ class WorkoutPageLayout extends StatelessWidget {
                               ),
                             ],
                           ),
-                          onTap: onTap,
+                          onTap: onTapDeleteIcon,
                         ),
                         PopupMenuDivider(),
                         PopupMenuItem(
@@ -103,7 +114,7 @@ class WorkoutPageLayout extends StatelessWidget {
                               Icon(Icons.edit),
                             ],
                           ),
-                          onTap: onTap,
+                          onTap: onTapEditIcon,
                         ),
                       ],
                     ),
