@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:magic_seniordev_test/constants/styles.dart';
-import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
 import 'package:provider/provider.dart';
+import '../../providers/userWorkOut.dart';
 
 class RecordedWorkoutScreen extends StatelessWidget {
   const RecordedWorkoutScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecordedWorkOutProvider>(builder: (context, data, child) {
+    return Consumer<UserWorkOutDataProvider>(builder: (context, data, child) {
       return SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -22,12 +23,12 @@ class RecordedWorkoutScreen extends StatelessWidget {
             ),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: data.recordedWorkouts.length,
+              itemCount: data.userRecordedWorkouts.length,
               itemBuilder: (BuildContext context, index) {
                 return WorkoutPageLayout(
                   containerIndex: index,
                   onTap: () {
-                    data.removeWorkout(index);
+                    data.removeRecordedWorkout(index);
                   },
                 );
               },
@@ -50,7 +51,7 @@ class WorkoutPageLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecordedWorkOutProvider>(builder: (context, data, child) {
+    return Consumer<UserWorkOutDataProvider>(builder: (context, data, child) {
       return Padding(
         padding: defaultPadding,
         child: Container(
@@ -124,15 +125,16 @@ class WorkoutPageLayout extends StatelessWidget {
               ),
               ListView.builder(
                   shrinkWrap: true,
-                  itemCount: data.recordedWorkouts[containerIndex].length,
+                  itemCount: data.userRecordedWorkouts[containerIndex].length,
                   itemBuilder: (BuildContext context, index) {
                     return ExerciseInfo(
-                      workoutName:
-                          data.recordedWorkouts[containerIndex][index].title,
+                      workoutName: data
+                          .userRecordedWorkouts[containerIndex][index].title,
                       weight: data
-                          .recordedWorkouts[containerIndex][index].weight
+                          .userRecordedWorkouts[containerIndex][index].weight
                           .toString(),
-                      reps: data.recordedWorkouts[containerIndex][index].reps
+                      reps: data
+                          .userRecordedWorkouts[containerIndex][index].reps
                           .toString(),
                     );
                   }),
@@ -158,7 +160,7 @@ class ExerciseInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<RecordedWorkOutProvider>(builder: (context, data, child) {
+    return Consumer<UserWorkOutDataProvider>(builder: (context, data, child) {
       return Row(
         children: [
           Padding(

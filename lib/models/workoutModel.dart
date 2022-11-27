@@ -1,16 +1,16 @@
 class WorkoutModel {
-  String img;
+  String? img;
   String title;
-  String subtitle;
+  String? subtitle;
   bool isSelected;
   int? set;
   int? reps;
   int? weight;
 
   WorkoutModel({
-    required this.img,
+    this.img,
     required this.title,
-    required this.subtitle,
+    this.subtitle,
     required this.isSelected,
     this.set,
     this.reps,

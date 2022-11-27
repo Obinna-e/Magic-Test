@@ -54,42 +54,24 @@ class WorkOutDataProvider extends ChangeNotifier {
     ),
   ];
 
-  late List<WorkoutModel> selectedWorkouts = List.from(workouts);
-  List<WorkoutModel> userWorkouts = [];
+  // List<WorkoutModel> get workout =>
+  //     _workouts.where((workout) => workout.isSelected == false).toList();
 
-  // List<List<WorkoutModel>> userWorkouts = [];
-  // UnmodifiableListView<WorkoutModel> get selectedWorkouts =>
-  //     UnmodifiableListView(_selectedWorkouts);
+  // List<WorkoutModel> get selectedWorkout =>
+  //     _workouts.where((workout) => workout.isSelected == true).toList();
 
-  // UnmodifiableListView<WorkoutModel> get workouts =>
-  //     UnmodifiableListView(_workouts);
+  bool toggleSelectedStatus(WorkoutModel workout) {
+    workout.isSelected = !workout.isSelected;
 
-  // void addWorkout(WorkoutModel workout) {
-  //   selectedWorkouts.add(workout);
-
-  //   notifyListeners();
-  // }
-
-  // void selectWorkout(WorkoutModel workout) {
-  //   selectedWorkouts = notifyListeners();
-  // }
-
-  void addWorkout(WorkoutModel workout) {
-    userWorkouts.add(workout);
     notifyListeners();
+    return workout.isSelected;
   }
 
-  void toggleWorkout(WorkoutModel workout) {
-    workout.toggle();
-    notifyListeners();
-  }
+  void toggleDeselect() {
+    for (var workout in workouts) {
+      workout.isSelected = false;
+    }
 
-  void removeWorkout(WorkoutModel workout) {
-    userWorkouts.remove(workout);
     notifyListeners();
-  }
-
-  void clearWorkout() {
-    userWorkouts.clear();
   }
 }

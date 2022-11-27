@@ -42,7 +42,7 @@ class WorkOutScreen extends StatelessWidget {
                       context: context,
                       backgroundColor: Colors.transparent,
                       builder: (context) {
-                        return const ModalBottomSheet();
+                        return ModalBottomSheet();
                       });
                 },
               )),

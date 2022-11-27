@@ -3,33 +3,19 @@ import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
 import 'package:magic_seniordev_test/models/workoutModel.dart';
 
 import 'package:magic_seniordev_test/pages/modalPage/widgets/editWorkoutPage.dart';
-import 'package:magic_seniordev_test/providers/recordedWorkOut.dart';
-import 'package:magic_seniordev_test/models/recordedWorkOutModel.dart';
 import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
 
-import '../../../constants/styles.dart';
+import '../../providers/userWorkOut.dart';
 import 'widgets/selectableWorkout.dart';
 
-class ModalBottomSheet extends StatefulWidget {
-  const ModalBottomSheet({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<ModalBottomSheet> createState() => _ModalBottomSheetState();
-
-  static _ModalBottomSheetState? of(BuildContext context) =>
-      context.findAncestorStateOfType<_ModalBottomSheetState>();
-}
-
-class _ModalBottomSheetState extends State<ModalBottomSheet> {
+class ModalBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    return Consumer2<WorkOutDataProvider, RecordedWorkOutProvider>(
+    return Consumer2<WorkOutDataProvider, UserWorkOutDataProvider>(
         builder: (context, data, data2, child) {
       return Container(
         decoration: const BoxDecoration(
@@ -48,10 +34,10 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                       title: 'Finish',
                       width: width * 0.2,
                       onTap: () {
-                        // data.addWorkout();
+                        data2.addRecordedWorkout(data2.userEditingWorkout);
 
-                        data2.addWorkout(data.userWorkouts);
-                        data.clearWorkout();
+                        data2.userEditingWorkout.clear();
+                        data.toggleDeselect();
 
                         Navigator.pop(context);
                       },
@@ -89,7 +75,8 @@ class _ModalBottomSheetState extends State<ModalBottomSheet> {
                     textColor: Colors.red,
                     buttonColor: Colors.deepOrange[100],
                     onTap: () {
-                      data.clearWorkout();
+                      data2.userEditingWorkout.clear();
+                      data.toggleDeselect();
                       Navigator.pop(context);
                     },
                   ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:magic_seniordev_test/models/workoutModel.dart';
+import 'package:magic_seniordev_test/providers/userWorkOut.dart';
 
 import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +23,8 @@ class WorkoutItems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<WorkOutDataProvider>(builder: (context, data, child) {
+    return Consumer2<WorkOutDataProvider, UserWorkOutDataProvider>(
+        builder: (context, data, data2, child) {
       return ListTile(
         leading: ConstrainedBox(
           constraints: const BoxConstraints(
@@ -38,18 +41,26 @@ class WorkoutItems extends StatelessWidget {
         ),
         title: Text(title),
         subtitle: Text(subtitle),
-        trailing: data.selectedWorkouts[index].isSelected
+        trailing: data.workouts[index].isSelected
             ? const Icon(Icons.check_circle, color: Colors.blue)
             : const Icon(
                 Icons.check_circle_outline,
                 color: Colors.grey,
               ),
         onTap: () {
-          data.selectedWorkouts[index].toggle();
-          if (data.selectedWorkouts[index].isSelected == true) {
-            data.addWorkout(data.selectedWorkouts[index]);
-          } else if (data.selectedWorkouts[index].isSelected == false) {
-            data.removeWorkout(data.selectedWorkouts[index]);
+          data.workouts[index].toggle();
+          if (data.workouts[index].isSelected == true) {
+            data2.addWorkout(WorkoutModel(
+              title: data.workouts[index].title,
+              set: data.workouts[index].set,
+              reps: data.workouts[index].reps,
+              weight: data.workouts[index].weight,
+              isSelected: data.workouts[index].isSelected,
+              img: data.workouts[index].img,
+              subtitle: data.workouts[index].subtitle,
+            ));
+          } else if (data.workouts[index].isSelected == false) {
+            data2.removeWorkout(data.workouts[index].title);
           }
         },
       );

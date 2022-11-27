@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './workoutItems.dart';
+import 'workoutDialog.dart';
 import '../../../providers/workOutData.dart';
 
 class SelectableWorkout extends StatelessWidget {
@@ -20,7 +20,7 @@ class SelectableWorkout extends StatelessWidget {
       return Dialog(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        child: Container(
+        child: SizedBox(
           height: height * 0.5,
           width: width * 0.98,
           child: Padding(
@@ -32,9 +32,9 @@ class SelectableWorkout extends StatelessWidget {
                       itemCount: data.workouts.length,
                       itemBuilder: (BuildContext context, int index) {
                         return WorkoutItems(
-                            img: data.workouts[index].img,
+                            img: data.workouts[index].img!,
                             title: data.workouts[index].title,
-                            subtitle: data.workouts[index].subtitle,
+                            subtitle: data.workouts[index].subtitle!,
                             isSelected: data.workouts[index].isSelected,
                             index: index);
                       },
