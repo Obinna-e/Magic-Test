@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
-import 'package:magic_seniordev_test/models/workoutModel.dart';
 
+import 'package:magic_seniordev_test/constants/widgets/customButton.dart';
 import 'package:magic_seniordev_test/pages/modalPage/widgets/editWorkoutPage.dart';
 import 'package:magic_seniordev_test/providers/workOutData.dart';
 import 'package:provider/provider.dart';
-
 import '../../providers/userWorkOut.dart';
 import 'widgets/selectableWorkout.dart';
 

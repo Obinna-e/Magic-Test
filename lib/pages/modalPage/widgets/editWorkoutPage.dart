@@ -24,6 +24,7 @@ class EditWorkout extends StatelessWidget {
               itemCount: workoutProvider.userEditingWorkout.length,
               itemBuilder: (context, index) {
                 final workout = workoutProvider.userEditingWorkout[index];
+                workout.set = index + 1;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -43,7 +44,7 @@ class EditWorkout extends StatelessWidget {
                               padding: defaultPadding,
                               child: Text('Set'),
                             ),
-                            Text('${index + 1}'),
+                            Text(workout.set.toString()),
                           ],
                         ),
                         const Spacer(),

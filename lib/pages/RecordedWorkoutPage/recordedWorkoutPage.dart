@@ -136,6 +136,8 @@ class WorkoutPageLayout extends StatelessWidget {
                       reps: data
                           .userRecordedWorkouts[containerIndex][index].reps
                           .toString(),
+                      set: data.userRecordedWorkouts[containerIndex][index].set
+                          .toString(),
                     );
                   }),
             ],
@@ -150,12 +152,14 @@ class ExerciseInfo extends StatelessWidget {
   final String workoutName;
   final String weight;
   final String reps;
+  final String set;
 
   const ExerciseInfo({
     Key? key,
     required this.workoutName,
     required this.weight,
     required this.reps,
+    required this.set,
   }) : super(key: key);
 
   @override
@@ -165,7 +169,7 @@ class ExerciseInfo extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsets.only(top: 2, bottom: 2),
-            child: Text('Set 2: $workoutName'),
+            child: Text('Set $set: $workoutName'),
           ),
           SizedBox(
             width: 100,
