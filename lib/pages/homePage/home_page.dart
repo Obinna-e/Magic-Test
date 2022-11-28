@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../RecordedWorkoutPage/recordedWorkoutPage.dart';
+import '../RecordedWorkoutPage/recorded_workout_page.dart';
 import '../modalPage/custom_modal.dart';
 import 'widgets/workout_screen.dart';
 

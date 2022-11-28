@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../constants/styles.dart';
 import '../../../providers/editing_workout.dart';
-import '../../../providers/userWorkOut.dart';
+import '../../../providers/user_workout.dart';
 
 class EditWorkout extends StatelessWidget {
   final bool isAnEdit;

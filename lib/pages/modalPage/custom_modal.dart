@@ -5,7 +5,7 @@ import '../../constants/widgets/custom_button.dart';
 import 'widgets/edit_workout_page.dart';
 import '../../providers/editing_workout.dart';
 import '../../providers/work_out_data.dart';
-import '../../providers/userWorkOut.dart';
+import '../../providers/user_workout.dart';
 import 'widgets/selectable_workout.dart';
 
 class ModalBottomSheet extends StatelessWidget {

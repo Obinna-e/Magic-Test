@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../../../models/workout_model.dart';
 import '../../../providers/editing_workout.dart';
-import '../../../providers/userWorkOut.dart';
+import '../../../providers/user_workout.dart';
 import '../../../providers/work_out_data.dart';
 
 class WorkoutItems extends StatelessWidget {

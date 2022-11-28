@@ -4,7 +4,7 @@ import 'package:magic_seniordev_test/constants/widgets/custom_button.dart';
 import 'package:magic_seniordev_test/pages/homePage/home_page.dart';
 import 'package:magic_seniordev_test/pages/modalPage/custom_modal.dart';
 import 'package:magic_seniordev_test/providers/editing_workout.dart';
-import 'package:magic_seniordev_test/providers/userWorkOut.dart';
+import 'package:magic_seniordev_test/providers/user_workout.dart';
 import 'package:magic_seniordev_test/providers/work_out_data.dart';
 import 'package:provider/provider.dart';
 

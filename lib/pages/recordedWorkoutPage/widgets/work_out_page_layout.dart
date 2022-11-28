@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../models/workout_model.dart';
 import '../../../providers/editing_workout.dart';
 import '../../../constants/styles.dart';
-import '../../../providers/userWorkOut.dart';
+import '../../../providers/user_workout.dart';
 import '../../modalPage/custom_modal.dart';
 import 'exercise_info.dart';
 

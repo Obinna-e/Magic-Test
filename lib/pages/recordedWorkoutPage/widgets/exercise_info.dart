@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/userWorkOut.dart';
+import '../../../providers/user_workout.dart';
 
 class ExerciseInfo extends StatelessWidget {
   final String workoutName;
