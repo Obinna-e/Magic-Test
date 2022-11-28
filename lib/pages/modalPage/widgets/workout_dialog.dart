@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/workoutModel.dart';
-import '../../../providers/editingWorkout.dart';
+import '../../../models/workout_model.dart';
+import '../../../providers/editing_workout.dart';
 import '../../../providers/userWorkOut.dart';
-import '../../../providers/workOutData.dart';
+import '../../../providers/work_out_data.dart';
 
 class WorkoutItems extends StatelessWidget {
   const WorkoutItems({

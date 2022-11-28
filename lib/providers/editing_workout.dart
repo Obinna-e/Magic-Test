@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:flutter/foundation.dart';
 
-import '../models/workoutModel.dart';
+import '../models/workout_model.dart';
 
 class EditWorkOutDataProvider extends ChangeNotifier {
   List<WorkoutModel> workouts = [

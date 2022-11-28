@@ -1,8 +1,7 @@
-import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../models/workoutModel.dart';
+import '../models/workout_model.dart';
 
 class WorkOutDataProvider extends ChangeNotifier {
   List<WorkoutModel> workouts = [

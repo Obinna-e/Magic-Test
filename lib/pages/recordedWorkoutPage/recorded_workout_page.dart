@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/styles.dart';
-import '../../providers/userWorkout.dart';
-import './widgets/workOutPageLayout.dart';
+import '../../providers/user_workout.dart';
+import 'widgets/work_out_page_layout.dart';
 
 class RecordedWorkoutScreen extends StatelessWidget {
   const RecordedWorkoutScreen({Key? key}) : super(key: key);

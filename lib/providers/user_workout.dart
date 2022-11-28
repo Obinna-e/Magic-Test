@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../models/workoutModel.dart';
+import '../models/workout_model.dart';
 
 class UserWorkOutDataProvider extends ChangeNotifier {
   List<List<WorkoutModel>> userRecordedWorkouts = [];

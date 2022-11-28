@@ -3,10 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants/styles.dart';
-import '../../../providers/editingWorkout.dart';
+import '../../../providers/editing_workout.dart';
 import '../../../providers/userWorkOut.dart';
-
-typedef void StringCallBack(String val);
 
 class EditWorkout extends StatelessWidget {
   final bool isAnEdit;

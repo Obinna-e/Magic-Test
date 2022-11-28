@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import './providers/userWorkout.dart';
-import './providers/workOutData.dart';
-import './pages/homePage/homePage.dart';
-import './providers/editingWorkout.dart';
+import 'providers/user_workout.dart';
+import 'providers/work_out_data.dart';
+import 'pages/homePage/home_page.dart';
+import './providers/editing_workout.dart';
 
 void main() {
   runApp(const MyApp());

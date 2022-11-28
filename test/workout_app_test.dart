@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:magic_seniordev_test/pages/homePage/homePage.dart';
-import 'package:magic_seniordev_test/pages/modalPage/customModal.dart';
-import 'package:magic_seniordev_test/providers/editingWorkout.dart';
+import 'package:magic_seniordev_test/constants/widgets/custom_button.dart';
+import 'package:magic_seniordev_test/pages/homePage/home_page.dart';
+import 'package:magic_seniordev_test/pages/modalPage/custom_modal.dart';
+import 'package:magic_seniordev_test/providers/editing_workout.dart';
 import 'package:magic_seniordev_test/providers/userWorkOut.dart';
-import 'package:magic_seniordev_test/providers/workOutData.dart';
+import 'package:magic_seniordev_test/providers/work_out_data.dart';
 import 'package:provider/provider.dart';
 
 // import 'package:test/test.dart';
@@ -21,18 +22,18 @@ void main() {
   group('HomePage Tests', () {
     testWidgets('HomePage Loads', (tester) async {
       await tester.pumpWidget(MediaQuery(
-        data: MediaQueryData(),
-        child: createWidgetForTesting(child: MyHomePage()),
+        data: const MediaQueryData(),
+        child: createWidgetForTesting(child: const MyHomePage()),
       ));
     });
   });
 
-  group('Modal textinputs', () {
-    testWidgets('ModalBorromSheet accepts params', (tester) async {
-      expect(ModalBottomSheet(isAnEdit: true).isAnEdit, true);
+  group('ModalButtomSheet tests', () {
+    testWidgets('ModalBottomSheet accepts params', (tester) async {
+      expect(const ModalBottomSheet(isAnEdit: true).isAnEdit, true);
 
       expect(
-          ModalBottomSheet(
+          const ModalBottomSheet(
             isAnEdit: true,
             index: 0,
           ).index,
@@ -52,9 +53,9 @@ void main() {
                 create: (context) => EditWorkOutDataProvider()),
           ],
           child: MediaQuery(
-            data: MediaQueryData(),
+            data: const MediaQueryData(),
             child: createWidgetForTesting(
-                child: ModalBottomSheet(
+                child: const ModalBottomSheet(
               isAnEdit: true,
               index: 0,
             )),
@@ -76,15 +77,43 @@ void main() {
                 create: (context) => EditWorkOutDataProvider()),
           ],
           child: MediaQuery(
-            data: MediaQueryData(),
+            data: const MediaQueryData(),
             child: createWidgetForTesting(
-                child: ModalBottomSheet(
+                child: const ModalBottomSheet(
               isAnEdit: false,
               index: 0,
             )),
           )));
 
       expect(find.text('New Workout'), findsOneWidget);
+      expect(
+          find.widgetWithText(CustomButton, 'Add Exercises'), findsOneWidget);
+    });
+
+    testWidgets(
+        'ModalBottomSheet button says "New Workout" when isAnEdit is true',
+        (tester) async {
+      await tester.pumpWidget(MultiProvider(
+          providers: [
+            ChangeNotifierProvider<WorkOutDataProvider>(
+                create: (context) => WorkOutDataProvider()),
+            ChangeNotifierProvider<UserWorkOutDataProvider>(
+                create: (context) => UserWorkOutDataProvider()),
+            ChangeNotifierProvider<EditWorkOutDataProvider>(
+                create: (context) => EditWorkOutDataProvider()),
+          ],
+          child: MediaQuery(
+            data: const MediaQueryData(),
+            child: createWidgetForTesting(
+                child: const ModalBottomSheet(
+              isAnEdit: false,
+              index: 0,
+            )),
+          )));
+
+      expect(find.text('New Workout'), findsOneWidget);
+      expect(
+          find.widgetWithText(CustomButton, 'Add Exercises'), findsOneWidget);
     });
   });
 }

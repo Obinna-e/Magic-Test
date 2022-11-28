@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../constants/widgets/customButton.dart';
-import '../../pages/modalPage/widgets/editWorkoutPage.dart';
-import '../../providers/editingWorkout.dart';
-import '../../providers/workOutData.dart';
+import '../../constants/widgets/custom_button.dart';
+import 'widgets/edit_workout_page.dart';
+import '../../providers/editing_workout.dart';
+import '../../providers/work_out_data.dart';
 import '../../providers/userWorkOut.dart';
-import '../modalPage/widgets/selectableWorkout.dart';
+import 'widgets/selectable_workout.dart';
 
 class ModalBottomSheet extends StatelessWidget {
   final bool isAnEdit;

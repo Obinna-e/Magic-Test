@@ -1,9 +1,8 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
 
 import '../RecordedWorkoutPage/recordedWorkoutPage.dart';
-import '../modalPage/customModal.dart';
-import './widgets/workoutScreen.dart';
+import '../modalPage/custom_modal.dart';
+import 'widgets/workout_screen.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -22,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    const List<Widget> _pages = [
+    const List<Widget> pages = [
       WorkOutScreen(),
       RecordedWorkoutScreen(),
     ];
@@ -31,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SafeArea(
         child: Padding(
             padding: const EdgeInsets.all(10.0),
-            child: _pages.elementAt(_selectedIndex)),
+            child: pages.elementAt(_selectedIndex)),
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: const [

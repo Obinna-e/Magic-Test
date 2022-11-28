@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../models/workoutModel.dart';
-import '../../../providers/editingWorkout.dart';
+import '../../../models/workout_model.dart';
+import '../../../providers/editing_workout.dart';
 import '../../../constants/styles.dart';
 import '../../../providers/userWorkOut.dart';
-import '../../modalPage/customModal.dart';
-import './exerciseInfo.dart';
+import '../../modalPage/custom_modal.dart';
+import 'exercise_info.dart';
 
 class WorkoutPageLayout extends StatelessWidget {
   final int containerIndex;
@@ -31,7 +31,6 @@ class WorkoutPageLayout extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              //TODO: Make this dynamic with dateTime
               Padding(
                 padding: defaultPadding,
                 child: Row(

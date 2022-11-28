@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../providers/editingWorkout.dart';
-import './workoutDialog.dart';
-import '../../../providers/workOutData.dart';
+import '../../../providers/editing_workout.dart';
+import 'workout_dialog.dart';
+import '../../../providers/work_out_data.dart';
 
 class SelectableWorkout extends StatelessWidget {
   final bool isAnEdit;
