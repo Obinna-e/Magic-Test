@@ -4,6 +4,7 @@ import 'package:magic_seniordev_test/constants/widgets/custom_button.dart';
 import 'package:magic_seniordev_test/pages/homePage/home_page.dart';
 import 'package:magic_seniordev_test/pages/modalPage/widgets/selectable_workout.dart';
 import 'package:magic_seniordev_test/pages/modalPage/widgets/workout_dialog.dart';
+import 'package:magic_seniordev_test/pages/recordedWorkoutPage/widgets/work_out_page_layout.dart';
 import 'package:magic_seniordev_test/providers/editing_workout.dart';
 import 'package:magic_seniordev_test/providers/user_workout.dart';
 import 'package:magic_seniordev_test/providers/work_out_data.dart';
@@ -45,21 +46,35 @@ void main() {
         find.widgetWithText(CustomButton, 'Add Exercises'),
       );
 
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       await tester.tap(find.widgetWithText(WorkoutItems, 'Barbell Row'));
 
       await tester.pumpAndSettle();
 
-      await tester.tap(find.widgetWithText(SelectableWorkout, 'Done'));
+      await tester.tap(find.widgetWithText(ElevatedButton, 'Done'));
 
       await tester.pumpAndSettle();
+
+      expect(find.byType(TextField), findsNWidgets(2));
 
       await tester.enterText(
           find.widgetWithText(TextField, 'Enter Weight'), '43');
       await tester.enterText(find.widgetWithText(TextField, 'Enter Reps'), '4');
 
-      // expect(UserWorkOutDataProvider().userEditingWorkout[0], 'Barbell Row');
+      await tester.tap(
+        find.widgetWithText(ElevatedButton, 'Finish'),
+      );
+
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.byKey(const Key('bottom')).last);
+
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(Key('history')), findsOneWidget);
+
+      expect(find.byType(ListView), findsWidgets);
     });
   });
 }

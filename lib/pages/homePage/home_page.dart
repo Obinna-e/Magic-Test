@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: pages.elementAt(_selectedIndex)),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        key: const Key('bottom'),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.sports_gymnastics),

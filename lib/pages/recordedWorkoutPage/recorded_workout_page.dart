@@ -18,6 +18,7 @@ class RecordedWorkoutScreen extends StatelessWidget {
             const Padding(
               padding: defaultPadding,
               child: Text(
+                key: Key('history'),
                 'History',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
               ),

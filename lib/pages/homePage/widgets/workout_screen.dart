@@ -18,6 +18,7 @@ class WorkOutScreen extends StatelessWidget {
         const Padding(
           padding: defaultPadding,
           child: Text(
+            key: Key('start workout'),
             'Start Workout',
             style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
           ),
